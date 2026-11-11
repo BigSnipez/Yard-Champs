@@ -149,6 +149,65 @@ details{font-size:14px;color:var(--muted)}summary{cursor:pointer;font-weight:700
 .end h2{font-size:28px}.end p{margin:0;color:var(--muted)}
 .suc{text-align:left!important;max-width:360px!important}.suc h2,.suc>p{text-align:left}.sut{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--muted)}.sul{font-size:14px;font-weight:700;color:var(--text);margin-top:4px}.suerr{color:var(--hit)!important;font-size:14px;min-height:18px}.sun{font-size:13px}.suc3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}#su .suc3 button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60px;height:auto!important;border-radius:16px!important;background:transparent;border:2px solid var(--muted)!important;color:var(--text)}#su .suc3 button[aria-pressed="true"]{background:var(--lime);border-color:var(--lime)!important;color:#0F1B2D}.suc3 button[aria-pressed="true"] small{color:#0F1B2D}#sugo:disabled,#ligo:disabled{opacity:.45;cursor:default}.suc>div{display:flex;flex-direction:column;gap:10px}.suc .cin{margin-top:-4px}#su .sulink{background:none;height:auto;min-height:40px;color:var(--muted);text-decoration:underline;font-weight:500;font-size:15px;border:0}.suc{max-height:calc(100dvh - 48px);overflow-y:auto}.acct{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:8px}.acct button{background:none;border:0;color:var(--muted);font:500 14px "Space Grotesk",system-ui,sans-serif;text-decoration:underline;cursor:pointer;min-height:44px}#cbtn{margin-top:8px;width:100%}
 #store{display:none!important}#outw .wnone{text-align:center;padding:26px 18px;grid-column:1/-1;align-items:center}
+
+
+/* fight tab on one screen */
+body.onfight .app{min-height:100vh;min-height:100dvh;box-sizing:border-box;padding-bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+body.onfight #fight{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0}
+body.onfight #fight>h2{display:none}
+body.onfight #rank{padding:10px 16px;gap:6px;border-radius:16px}
+body.onfight #rank .sub{display:none}body.onfight #rank{flex-direction:row;align-items:center;gap:12px}body.onfight #rank .row{flex:none;gap:10px}body.onfight #rank .bar{flex:1}
+body.onfight .arena{flex:1 1 auto;height:auto;min-height:170px;max-height:560px}
+body.onfight #pre{padding:14px 16px;gap:8px;border-radius:18px}
+body.onfight #pre h3{display:none}
+body.onfight #pre .go{height:54px}
+body.onfight #pre #fnote:empty{display:none}
+body.onfight #pre #fnote{margin:0;font-size:14px}
+body.onfight #pre details{font-size:13px}
+body.onfight #pre summary{min-height:24px}
+body.onfight #rec{display:none}body.onfight #pre>p.sub{font-size:13px;text-align:center}body.onfight #pre details{text-align:center}body.onfight #pre details[open]{text-align:left}
+/* clean battle mode */
+/* moves on the arena */
+.arena .btns{display:none}
+body.infight .intent{display:none!important}
+body.infight .arena .btns{display:grid!important;position:absolute;left:8px;right:8px;bottom:8px;z-index:4;grid-template-columns:repeat(4,1fr);gap:6px;margin:0!important}
+body.infight .arena .btns button{min-height:54px!important;padding:6px 4px!important;border-radius:14px!important;border:0!important;background:rgba(15,27,45,.86)!important;color:#fff!important;font-size:13px!important;box-shadow:0 3px 0 rgba(0,0,0,.25)}
+body.infight .arena .btns button span:first-child{font-size:13px!important;line-height:1.1}
+body.infight .arena .btns button span+span{font-size:10px!important;color:#C9D3E3!important}
+body.infight .arena .btns button span+span:empty{display:none}
+body.infight .arena .btns button.pri{background:var(--lime)!important;color:#0F1B2D!important}
+body.infight .arena .btns button.pri2{background:#FF8A4C!important;color:#0F1B2D!important}
+body.infight .arena .btns button.pri span+span,body.infight .arena .btns button.pri2 span+span{color:#0F1B2D!important}
+body.infight .arena .btns button:disabled{opacity:.4!important}
+body.infight .arena .spr{bottom:76px}
+body.infight .arena{min-height:330px!important;max-height:none!important}
+#iqchip{position:absolute;left:50%;transform:translateX(-50%);top:92px;z-index:3;background:rgba(107,79,214,.92);color:#fff;font-weight:700;font-size:13px;border-radius:99px;padding:6px 12px;white-space:nowrap;max-width:calc(100% - 20px);overflow:hidden;text-overflow:ellipsis}
+body:not(.infight) #iqchip{display:none}
+body.infight #flog{order:0!important}
+
+body.infight .hdr,body.infight #who,body.infight #fight>h2,body.infight #tabs,body.infight #rank,body.infight #battle .pick{display:none!important}
+body.infight #fight{gap:10px;min-height:calc(100vh - 40px - env(safe-area-inset-bottom,0px));min-height:calc(100dvh - 40px - env(safe-area-inset-bottom,0px))}body.infight #battle{flex:none}body.infight .btns{margin-top:auto}
+body.infight .arena{flex:1 1 auto;height:auto;max-height:560px;min-height:260px;border-radius:24px}
+body.infight #battle{gap:10px}
+body.infight .intent{padding:12px 16px;border-radius:18px;display:grid;grid-template-columns:1fr;gap:2px}
+body.infight #mvname{font-size:20px;margin:0}
+body.infight #mvdesc{font-size:14px}
+body.infight #mvnext{font-size:12px;opacity:.8}
+body.infight #flog{order:1;min-height:0;font-size:14px;color:var(--muted);text-align:center;margin:0 6px}
+body.infight #flog:empty{display:none}
+body.infight .btns{order:2;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+body.infight .btns button{height:auto;min-height:92px;flex-direction:column;justify-content:center;align-items:center;gap:4px;padding:10px 6px;text-align:center;border-radius:20px;transition:transform .08s}
+body.infight .btns button:active:not(:disabled){transform:scale(.96)}
+body.infight .btns button span:first-child{font-size:16px;line-height:1.15}
+body.infight .btns button span+span{font-size:12px;line-height:1.2}
+body.infight .btns button:disabled{opacity:.45}
+body.infight main{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))!important}
+.pop{font-size:30px!important;font-weight:800;-webkit-text-stroke:1px #fff;animation:popup .9s ease-out forwards}
+@keyframes popup{0%{transform:translateY(6px) scale(.6);opacity:0}20%{transform:translateY(-6px) scale(1.15);opacity:1}100%{transform:translateY(-40px) scale(1);opacity:0}}
+@media(prefers-reduced-motion:reduce){.pop{animation:none}}
+
+#clan p.note:empty{display:none}
+.fcode{font:700 34px "Space Grotesk",system-ui,sans-serif;letter-spacing:.18em;text-align:center;background:var(--track);border-radius:16px;padding:14px 8px;user-select:all;-webkit-user-select:all}
 .end button{height:52px;border:0;border-radius:26px;background:var(--lime);color:#0F1B2D;font:700 17px "Space Grotesk",system-ui,sans-serif;cursor:pointer}
 </style>
 </head>
@@ -176,12 +235,12 @@ details{font-size:14px;color:var(--muted)}summary{cursor:pointer;font-weight:700
 <div class="banner"><div id="bn-idle"><b id="bn-title"></b><span class="s">Computer opponent</span></div>
 <div class="bhp" id="bn-hp" hidden><div><div class="name"><span id="pname"></span><small id="pspd"></small></div><div class="bar"><div id="pbar"></div></div><div class="hp" id="php"></div></div>
 <div><div class="name"><span id="ename"></span><small id="round"></small></div><div class="bar"><div id="ebar"></div></div><div class="hp" id="ehp"></div></div></div></div>
-<div class="spr" id="osp"></div><div class="spr" id="psp"></div></section>
-<section class="card" id="pre"><h3>Ranked battle</h3><p class="sub" style="margin:0">Win: +25 RP and +15 coins. Lose: −10 RP.</p><button class="go" id="fbtn">Fight (1 ticket)</button><p id="fnote" aria-live="polite"></p><details><summary>How fights work</summary><div class="cmp" id="cmp"></div><p class="note" style="margin:8px 0 0">Speed moves first. Strength hits harder. IQ boosts Guard. Stamina adds HP. Focus adds a chance of a big hit.</p></details><p class="note" id="rec" style="margin:0"></p></section>
+<div class="spr" id="osp"></div><div class="spr" id="psp"></div><div id="iqchip" hidden></div></section>
+<section class="card" id="pre"><h3>Ranked battle</h3><p class="sub" style="margin:0">Win: +25 RP and +15 coins. Lose: −10 RP.</p><button class="go" id="fbtn">Fight (1 ticket)</button><p id="fnote" aria-live="polite"></p><details><summary>How fights work</summary><div class="cmp" id="cmp"></div><p class="note" style="margin:8px 0 0">Fast attack: a normal hit. Strong attack: hits much harder but always goes last. Block: take less damage (IQ makes it stronger). Dodge: avoids Heavy Swings completely, but not Quick Hooks. You can’t use the same move twice in a row. Speed decides who moves first, Strength hits harder, Stamina adds HP, Focus gives a chance of a big hit, and IQ Level 5 shows the opponent’s next moves.</p></details><p class="note" id="rec" style="margin:0"></p></section>
 <div id="battle" hidden>
 <section class="intent"><div class="tag" id="mvtag"></div><div id="mvname"></div><div id="mvdesc"></div><div id="mvnext"></div></section>
 <div class="pick">Pick your response</div>
-<div class="btns"><button class="pri" data-m="strike"><span id="sn"></span><span id="sd"></span></button><button data-m="sidestep"><span>Sidestep</span><span>Get out of the way</span></button><button data-m="guard"><span>Guard</span><span id="gd"></span></button></div>
+<div class="btns"><button class="pri" data-m="strike"><span id="sn">Fast attack</span><span id="sd"></span></button><button class="pri2" data-m="strong"><span>Strong attack</span><span></span></button><button data-m="guard"><span>Block</span><span id="gd"></span></button><button data-m="sidestep"><span>Dodge</span><span></span></button></div>
 <p id="flog" aria-live="polite"></p>
 </div>
 </div>
@@ -206,10 +265,10 @@ details{font-size:14px;color:var(--muted)}summary{cursor:pointer;font-weight:700
 <section class="card" id="soon" style="align-items:center;text-align:center;gap:6px;padding:18px 20px"><h3 style="margin:0">🛍️ Shop coming soon</h3><p class="note" style="margin:0">New colourways and outfits are on the way. Keep winning fights: the coins you earn now will be ready to spend when the shop opens.</p></section>
 </div>
 </main>
-<nav class="opts" id="tabs" aria-label="Main"><button data-t="train" aria-pressed="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 5 14h6l-1 7 8-11h-6z"/></svg>Train</button><button data-t="fight" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m14 4 6 6M4 20l9-9M12 6l6 6M8 20l-4-4M3 21l3-1"/><path d="m14 4 3-1 4 4-1 3"/></svg>Fight</button><button data-t="ranks" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3M12 14v4M8 21h8"/></svg>Ranks</button><button data-t="clan" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.6"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M15 14.5c3 0 6 1.5 6 5.5"/></svg>Clan</button><button data-t="shop" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1 12H5zM8 8a4 4 0 0 1 8 0"/></svg>Shop</button></nav>
+<nav class="opts" id="tabs" aria-label="Main"><button data-t="train" aria-pressed="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 5 14h6l-1 7 8-11h-6z"/></svg>Train</button><button data-t="fight" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m14 4 6 6M4 20l9-9M12 6l6 6M8 20l-4-4M3 21l3-1"/><path d="m14 4 3-1 4 4-1 3"/></svg>Fight</button><button data-t="ranks" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3M12 14v4M8 21h8"/></svg>Ranks</button><button data-t="clan" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.6"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M15 14.5c3 0 6 1.5 6 5.5"/></svg>Family</button><button data-t="shop" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1 12H5zM8 8a4 4 0 0 1 8 0"/></svg>Shop</button></nav>
 <div class="end" id="evm" hidden><div id="evb2"></div></div>
 <div class="end" id="su" hidden><div class="suc">
-<div id="suS"><div class="sut">STEP 1 OF 2</div><h2>Create your account</h2><p>Your fighter name shows on the leaderboard and in your clan.</p>
+<div id="suS"><div class="sut">STEP 1 OF 2</div><h2>Create your account</h2><p>Your fighter name shows on the leaderboard and in your family.</p>
 <label class="sul" for="suname">Fighter name</label><input class="cin" id="suname" maxlength="16" autocomplete="nickname" placeholder="e.g. GreystonesGrinder">
 <label class="sul" for="suemail">Email</label><input class="cin" id="suemail" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com">
 <label class="sul" for="supass">Password</label><input class="cin" id="supass" type="password" autocomplete="new-password" placeholder="At least 6 characters">
@@ -433,7 +492,7 @@ function renderAcct(){const a=$("acct");a.innerHTML="";const on=!!(sb&&myId&&pro
 if(on){const t=el("span","note","Logged in as "+prof.name);const b=el("button",null,"Log out");b.onclick=logOut;a.append(t,b);}
 else{const b=el("button",null,"Create account or log in");b.onclick=()=>openAcct("s");a.append(b);}
 $("cbtn").hidden=on||!sb;}
-async function logOut(){try{await sb.auth.signOut();}catch(e){}myId=null;prof=null;saveProf();others=[];st=fresh();lastSave="";lastPlayer="";try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}
+async function logOut(){try{await sb.auth.signOut();}catch(e){}try{famReset();}catch(e){}myId=null;prof=null;saveProf();others=[];st=fresh();lastSave="";lastPlayer="";try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}
 render();renderPre();renderLB();renderShop();renderAcct();loadLB();cnote("Logged out. Create an account or log in to join the online leaderboard.");openAcct("l");}
 $("cbtn").onclick=()=>openAcct("s");
 if(!prof)openAcct("s");else if(!seenWel()){$("welh").textContent="Welcome to Yard Champs";$("wel").hidden=false;}
@@ -507,48 +566,91 @@ const b=document.createElement("button");b.className="go";b.textContent=k.eur;
 b.onclick=()=>openCheckout(k);
 d.append(b);box.append(d);});}
 
-/* Clans (computer members for now; real clans need an online service) */
-const CLANS=[{id:"sneak",n:"Sneaker Heads",c:"#2F55D4",t:"Runners and walkers",m:["Aoife","Cian","Niamh","Seán","Orla","Dara","Fionn"]},
-{id:"crank",n:"Crank Crew",c:"#F07A2A",t:"Lifters and grinders",m:["Rory","Saoirse","Eoin","Maeve","Conor","Aisling"]},
-{id:"dawn",n:"Dawn Patrol",c:"#1FA874",t:"Early risers",m:["Tadhg","Róisín","Cathal","Ciara","Darragh","Ailbhe","Oisín","Sorcha"]},
-{id:"pages",n:"Page Turners",c:"#6B4FD6",t:"Readers and thinkers",m:["Éabha","Colm","Grainne","Padraig","Clodagh"]}];
+/* Families (online: create, join with a code, head can remove people) */
 const SWATCH=["#2F55D4","#E5282B","#1FA874","#6B4FD6","#F0A020"];
 function wkKey(){const d=new Date();const m=new Date(d);m.setDate(d.getDate()-((d.getDay()+6)%7));return m.toLocaleDateString("en-CA");}
-function wkFrac(){const d=new Date();return Math.max(.04,(((d.getDay()+6)%7)+(d.getHours()+d.getMinutes()/60)/24)/7);}
-function hsh(x){let h=7;for(let i=0;i<x.length;i++)h=(h*31+x.charCodeAt(i))>>>0;return h;}
-function simMin(name,wk){const h=hsh(name+wk),base=90+h%260;return Math.round(base*wkFrac()*(.75+((h>>8)%50)/100));}
-function clanRoll(){if(st.clan&&st.clan.wk!==wkKey()){st.clan.wk=wkKey();st.clan.min=0;}}
-function clanAdd(m){if(!st.clan)return;clanRoll();st.clan.min+=m;}
-function clanMembers(cl){const wk=wkKey();return cl.m.map(n=>({n,min:simMin(n+cl.id,wk)}));}
 function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
 function badge(color,name){const d=el("div","cb");const l=(name||"?").trim()[0]||"?";d.innerHTML=`<svg viewBox="0 0 56 64"><path d="M6 10 Q28 2 50 10 V32 Q50 52 28 62 Q6 52 6 32Z" fill="#0B1030"/><path d="M9 12 Q28 5 47 12 V32 Q47 49 28 58 Q9 49 9 32Z" fill="${color}" stroke="#B8F34A" stroke-width="3"/><text x="28" y="40" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="28" fill="#FBEBC4" stroke="#0B1030" stroke-width="3" paint-order="stroke"></text></svg>`;d.querySelector("text").textContent=l.toUpperCase();return d;}
-let newCol=SWATCH[0];
-function renderClan(){clanRoll();const root=$("clan");root.innerHTML="";
-if(!st.clan){root.append(el("h3",null,"Clans"),el("p","sub","Team up. Your training minutes count toward a weekly goal you hit together."));
-const f=el("section","card");f.append(el("h2",null,"Join a clan"));
-CLANS.forEach(cl=>{const r=el("div","mem");r.append(badge(cl.c,cl.n));r.firstChild.style.cssText="width:34px;height:40px";const tx=el("b",null,cl.n);const sm=el("span",null,cl.t+" · "+cl.m.length+" members");r.append(tx);tx.append(document.createElement("br"),sm);
-const b=el("button","sec","Join");b.style.cssText="height:40px;padding:0 18px";b.onclick=()=>{st.clan={id:cl.id,name:cl.n,color:cl.c,lead:false,wk:wkKey(),min:0,claimed:""};save();renderClan();};r.append(b);f.append(r);});
-root.append(f);
-const c=el("section","card");c.append(el("h2",null,"Start your own"));
-const inp=el("input","cin");inp.placeholder="Clan name";inp.maxLength=18;inp.setAttribute("aria-label","Clan name");
-const sw=el("div","sw");SWATCH.forEach(k=>{const b=el("button");b.style.background=k;b.setAttribute("aria-label","Colour "+k);b.setAttribute("aria-pressed",k===newCol);b.onclick=()=>{newCol=k;sw.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));};sw.append(b);});
-const go=el("button","go","Create clan");go.onclick=()=>{const n=inp.value.trim();if(n.length<2){inp.focus();return;}
-st.clan={id:"own",name:n,color:newCol,lead:true,wk:wkKey(),min:0,claimed:"",mates:["Scout Kai","Scout Mia","Scout Joe"]};save();renderClan();};
-c.append(inp,sw,go,el("p","note","Your new clan starts with three computer scouts. Real friends can join once online clans are added."));root.append(c);return;}
-const k=st.clan,known=CLANS.find(x=>x.id===k.id);
-const list=(known?clanMembers(known):(k.mates||[]).map(n=>({n,min:simMin(n,wkKey())}))).concat([{n:me(),min:k.min,me:1}]).sort((a,b)=>b.min-a.min);
-const total=list.reduce((a,b)=>a+b.min,0),goal=200*list.length,pct=Math.min(100,Math.round(total/goal*100));
-const h=el("section","card");const top=el("div","chd");top.append(badge(k.color,k.name));const tt=el("div");tt.append(el("h3",null,k.name),el("p","sub",list.length+" members"+(k.lead?" · you lead":"")));top.append(tt);h.append(top);
-const gr=el("div","row");gr.append(el("span",null,"Weekly goal"),el("em",null,pct+"%"));const bar=el("div","bar");const bi=el("div");bi.style.cssText="width:"+pct+"%;background:var(--lime)";bar.append(bi);h.append(gr,bar,el("p","sub",total+" of "+goal+" minutes this week. Resets every Monday."));
-const done=total>=goal,got=k.claimed===wkKey();
-const cb=el("button","go",done?(got?"Chest claimed":"Claim clan chest: 50 coins"):"Chest unlocks at the goal");cb.disabled=!done||got;
-cb.onclick=()=>{st.coins+=50;k.claimed=wkKey();save();renderTop();renderClan();};h.append(cb);root.append(h);
+function clanAdd(m){const k=wkKey();if(!st.wkm||st.wkm.wk!==k)st.wkm={wk:k,min:0};st.wkm.min+=m;}
+function myWeekMin(){return st.wkm&&st.wkm.wk===wkKey()?st.wkm.min:0;}
+let fam={state:"idle",data:null,members:[],t:0,err:""},newCol=SWATCH[0],famBusy=false,famArm="";
+const CODECH="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+function newCode(){let c="";for(let i=0;i<6;i++)c+=CODECH[Math.floor(Math.random()*CODECH.length)];return c;}
+function uuid(){try{if(crypto.randomUUID)return crypto.randomUUID();}catch(e){}return"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==="x"?r:(r&3|8)).toString(16);});}
+function famReset(){fam={state:"idle",data:null,members:[],t:0,err:""};famArm="";}
+async function loadFamily(){if(!sb||!myId){renderClan(true);return;}
+famBusy=true;if(!fam.data)fam.state="loading";
+try{const r=await within(sb.from("family_members").select("family_id").eq("user_id",myId).maybeSingle(),10000);
+if(r.error)throw r.error;
+if(!r.data){fam.state="none";fam.data=null;fam.members=[];fam.t=Date.now();}
+else{const fid=r.data.family_id;
+const [fr,mr]=await Promise.all([sb.from("families").select("id,name,color,owner,code").eq("id",fid).maybeSingle(),sb.from("family_members").select("user_id").eq("family_id",fid)]);
+if(fr.error||!fr.data)throw fr.error||{message:"missing"};
+const ids=(mr.data||[]).map(x=>x.user_id);
+const pr=ids.length?await sb.from("players").select("id,name,wk,wk_min").in("id",ids):{data:[]};
+const wk=wkKey();
+fam.members=ids.map(id=>{const p=(pr.data||[]).find(x=>x.id===id)||{};const mine=id===myId;return{id,name:mine?prof.name:String(p.name||"Player").slice(0,16),min:mine?myWeekMin():(p.wk===wk?Math.max(0,Number(p.wk_min)||0):0),me:mine};}).sort((a,b)=>b.min-a.min);
+fam.data=fr.data;fam.state="in";fam.t=Date.now();}}
+catch(e){fam.state=fam.data?"in":"error";fam.err="Couldn't load your family. Check your signal and try again.";fam.t=Date.now();}
+famBusy=false;if(!$("clan").hidden)renderClan(true);}
+function famSwatches(){const sw=el("div","sw");SWATCH.forEach(k=>{const b=el("button");b.type="button";b.style.background=k;b.setAttribute("aria-label","Colour");b.setAttribute("aria-pressed",k===newCol);b.onclick=()=>{newCol=k;sw.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));};sw.append(b);});return sw;}
+async function createFamily(n,msg,btn){btn.disabled=true;msg.textContent="";
+try{const id=uuid();let ok=false,last=null;
+for(let i=0;i<5&&!ok;i++){const r=await sb.from("families").insert({id,name:n,color:newCol,owner:myId,code:newCode()});if(!r.error)ok=true;else{last=r.error;if(r.error.code!=="23505")break;}}
+if(!ok)throw last||{};
+const m=await sb.from("family_members").insert({user_id:myId,family_id:id});
+if(m.error){await sb.from("families").delete().eq("id",id);msg.textContent=m.error.code==="23505"?"You're already in a family. Leave it first.":"Couldn't create the family. Try again.";btn.disabled=false;return;}
+fam.t=0;await loadFamily();}
+catch(e){msg.textContent="Couldn't create the family. Try again.";btn.disabled=false;}}
+async function joinFamily(code,msg,btn){btn.disabled=true;msg.textContent="";
+try{const f=await sb.from("families").select("id,name").eq("code",code).maybeSingle();
+if(f.error)throw f.error;if(!f.data){msg.textContent="No family has that code. Check it and try again.";btn.disabled=false;return;}
+const m=await sb.from("family_members").insert({user_id:myId,family_id:f.data.id});
+if(m.error){msg.textContent=m.error.code==="23505"?"You're already in a family. Leave it first.":"Couldn't join. Try again.";btn.disabled=false;return;}
+fam.t=0;await loadFamily();}
+catch(e){msg.textContent="Couldn't join. Check your signal and try again.";btn.disabled=false;}}
+async function famDo(p){try{const r=await p;if(r&&r.error)throw r.error;}catch(e){fam.err="That didn't work. Try again.";}famArm="";fam.t=0;await loadFamily();}
+function renderClan(fromLoad){const root=$("clan");
+if(!fromLoad&&sb&&myId&&!famBusy&&Date.now()-fam.t>15000)loadFamily();
+root.innerHTML="";root.append(el("h3",null,"Family"));
+if(!sb||!myId||!prof||prof.offline){const c=el("section","card");c.append(el("h2",null,"Train together"),el("p","sub","Start a family with friends or family. Everyone’s training minutes count toward a weekly goal, and you can see who puts in the most. You need an account for this."));
+if(sb){const b=el("button","go","Create account or log in");b.onclick=()=>openAcct("s");c.append(b);}root.append(c);return;}
+if(fam.state==="idle"||fam.state==="loading"){root.append(el("p","sub","Loading your family…"));return;}
+if(fam.state==="error"){root.append(el("p","sub",fam.err));const b=el("button","sec","Try again");b.onclick=()=>{fam.t=0;loadFamily();};root.append(b);return;}
+if(fam.state==="none"){
+root.append(el("p","sub","Train together. Everyone’s minutes count toward a weekly family goal."));
+const c=el("section","card");c.append(el("h2",null,"Start a family"));
+const inp=el("input","cin");inp.placeholder="Family name";inp.maxLength=18;inp.setAttribute("aria-label","Family name");
+const msg=el("p","note");msg.setAttribute("aria-live","polite");msg.style.color="var(--hit)";
+const go=el("button","go","Create family");go.onclick=()=>{const n=inp.value.trim().replace(/\s+/g," ");if(n.length<2){msg.textContent="Give your family a name (at least 2 letters).";return;}createFamily(n,msg,go);};
+c.append(inp,famSwatches(),go,msg,el("p","note","It starts with just you. You’ll get a code to share, and as head of the family you can remove people."));root.append(c);
+const j=el("section","card");j.append(el("h2",null,"Join a family"));
+const ci=el("input","cin");ci.placeholder="6-letter code";ci.maxLength=6;ci.setAttribute("aria-label","Family code");ci.setAttribute("autocapitalize","characters");ci.style.textTransform="uppercase";ci.style.letterSpacing=".2em";
+const jm=el("p","note");jm.setAttribute("aria-live","polite");jm.style.color="var(--hit)";
+const jb=el("button","sec","Join");jb.onclick=()=>{const code=ci.value.trim().toUpperCase().replace(/[^A-Z0-9]/g,"");if(code.length!==6){jm.textContent="Codes are 6 letters and numbers.";return;}joinFamily(code,jm,jb);};
+j.append(ci,jb,jm,el("p","note","Ask the head of a family for their code."));root.append(j);return;}
+const F=fam.data,head=F.owner===myId,list=fam.members;
+const h=el("section","card");const top=el("div","chd");top.append(badge(F.color,F.name));const tt=el("div");const headName=(list.find(x=>x.id===F.owner)||{}).name;
+tt.append(el("h3",null,F.name),el("p","sub",list.length+(list.length===1?" member":" members")+(head?" · you’re the head":headName?" · head: "+headName:"")));top.append(tt);h.append(top);
+const total=list.reduce((a,b)=>a+b.min,0),goal=150*Math.max(1,list.length),pct=Math.min(100,Math.round(total/goal*100));
+const gr=el("div","row");gr.append(el("span",null,"Weekly goal"),el("em",null,pct+"%"));const bar=el("div","bar");const bi=el("div");bi.style.cssText="width:"+pct+"%;background:var(--lime)";bar.append(bi);
+h.append(gr,bar,el("p","sub",total+" of "+goal+" minutes this week. Resets every Monday."));
+const ck=wkKey()+":"+F.id,done=total>=goal,got=st.famClaim===ck;
+const cb=el("button","go",done?(got?"Chest claimed":"Claim family chest: 50 coins"):"Chest unlocks at the goal");cb.disabled=!done||got;
+cb.onclick=()=>{if(st.famClaim===ck)return;st.coins+=50;st.famClaim=ck;save();renderTop();renderClan(true);};h.append(cb);root.append(h);
+if(head){const c=el("section","card");c.append(el("h2",null,"Invite people"));const code=el("div","fcode",F.code);
+const cp=el("button","sec","Copy code");cp.onclick=async()=>{try{await navigator.clipboard.writeText(F.code);cp.textContent="Copied!";}catch(e){cp.textContent="Copy it by hand";}setTimeout(()=>{cp.textContent="Copy code";},1800);};
+c.append(code,cp,el("p","note","Send this code to anyone you want in your family. They type it in on their Family tab."));root.append(c);}
 const m=el("section","card");m.append(el("h2",null,"Members this week"));
-list.forEach((x,i)=>{const r=el("div","mem"+(x.me?" me":""));r.append(el("span","rk",String(i+1)),el("b",null,x.n),el("span",null,x.min+" min"));m.append(r);});
-m.append(el("p","note","Your minutes come from activities you log. Computer members stand in until real clans are added."));root.append(m);
-const L=CLANS.filter(x=>x.id!==k.id).map(x=>({n:x.n,min:clanMembers(x).reduce((a,b)=>a+b.min,0)})).concat([{n:k.name,min:total,me:1}]).sort((a,b)=>b.min-a.min);
-const lb=el("section","card");lb.append(el("h2",null,"Clan ranking"));L.forEach((x,i)=>{const r=el("div","cl"+(x.me?" me":""));r.append(el("span","rk",String(i+1)),el("b",null,x.n),el("span",null,x.min+" min"));lb.append(r);});root.append(lb);
-const lv=el("button","reset","Leave clan");lv.onclick=()=>{st.clan=null;save();renderClan();};root.append(lv);}
+list.forEach((x,i)=>{const r=el("div","mem"+(x.me?" me":""));const nm=el("b",null,x.name+(x.id===F.owner?" 👑":"")+(x.me?" (you)":""));r.append(el("span","rk",String(i+1)),nm,el("span",null,x.min+" min"));
+if(head&&!x.me){const arm=famArm==="rm:"+x.id;const rb=el("button","sec",arm?"Sure?":"Remove");rb.style.cssText="height:36px;padding:0 12px;font-size:13px"+(arm?";border-color:var(--hit);color:var(--hit)":"");
+rb.onclick=()=>{if(!arm){famArm="rm:"+x.id;renderClan(true);return;}rb.disabled=true;famDo(sb.from("family_members").delete().eq("user_id",x.id).eq("family_id",F.id));};r.append(rb);}
+m.append(r);});
+if(list.length===1)m.append(el("p","note",head?"It’s just you for now. Share your code to bring people in.":"It’s just you here."));
+root.append(m);
+if(fam.err&&fam.state==="in"){root.append(el("p","note",fam.err));fam.err="";}
+const armL=famArm==="leave";const lv=el("button","reset",head?(armL?"Tap again to delete the family for everyone":"Delete family"):(armL?"Tap again to leave":"Leave family"));
+lv.onclick=()=>{if(!armL){famArm="leave";renderClan(true);return;}lv.disabled=true;famDo(head?sb.from("families").delete().eq("id",F.id):sb.from("family_members").delete().eq("user_id",myId));};root.append(lv);}
 
 function avgLv(c){let t=0;S.forEach(q=>t+=info(st[c].xp[q.k]).L);return t/S.length;}
 function openEvo(){const c=who,b=$("evb2"),a=avgLv(c),cur=tierOf(c);b.innerHTML="";
@@ -642,7 +744,7 @@ if(i.L>before)$("v-"+act).animate([{transform:"scale(1)"},{transform:"scale(1.4)
 /* Fight */
 const rnd=()=>Math.random()<.5?"heavy":"quick";
 const btns=[...document.querySelectorAll(".btns button")];
-function openBtns(){btns.forEach(b=>{const sub=b.querySelectorAll("span")[1];if(!b.dataset.sub)b.dataset.sub=sub.textContent;const used=g&&g.last===b.dataset.m;b.disabled=used;sub.textContent=used?"Used last round":b.dataset.sub;});}
+function openBtns(){btns.forEach(b=>{const sub=b.querySelectorAll("span")[1];if(!b.dataset.sub)b.dataset.sub=sub.textContent;const used=g&&g.last===b.dataset.m;b.disabled=used;sub.textContent=used?"Just used":b.dataset.sub;});}
 function setLock(on){$("who").querySelectorAll("button").forEach(b=>b.disabled=on);}
 $("fbtn").onclick=()=>{
 if(st.tickets<1)return;st.tickets--;save();
@@ -654,31 +756,31 @@ mv:{heavy:{n:"Heavy Swing",dmg:6+2*O("strength"),w:450,d:"Slow wind-up, "},quick
 g.first=g.sp>g.os;setLock(true);
 $("pre").hidden=true;$("rank").hidden=true;$("bn-idle").hidden=true;$("bn-hp").hidden=false;$("battle").hidden=false;$("end").hidden=true;
 $("ename").textContent=CH[o].n;$("pname").textContent=CH[who].n;$("pspd").textContent="Speed "+g.sp;
-$("mvtag").textContent=CH[o].n+"’s next move";$("sn").textContent=CH[who].n+" Strike";$("sd").textContent="Hit back";$("gd").textContent="Brace for impact";
-$("flog").textContent=CH[o].n+" is winding up. Choose how "+CH[who].n+" responds.";
+$("mvtag").textContent=CH[o].n+"’s next move";
+$("flog").textContent="Watch "+CH[o].n+" wind up: a slow glowing wind-up is a Heavy Swing, a fast shake is a Quick Hook.";
 g.last=null;telegraph();renderF();openBtns();renderTop();
 };
 function renderF(){$("ebar").style.width=g.eh/g.mo*100+"%";$("pbar").style.width=g.ph/g.mp*100+"%";$("ehp").textContent="HP "+g.eh+" / "+g.mo;$("php").textContent="HP "+g.ph+" / "+g.mp;$("round").textContent="Round "+g.round;}
 function telegraph(){
 g.cur=g.queue.shift();g.queue.push(rnd());const m=g.mv[g.cur];
 $("mvname").textContent=m.n;$("mvdesc").textContent="Watch the wind-up…";
-$("mvnext").textContent=g.iq>=5?"Move after that: "+g.mv[g.queue[0]].n:"Reach IQ Level 5 to see the move after this one.";
+$("mvnext").textContent=g.iq>=5?"Move after that: "+g.mv[g.queue[0]].n:"Reach IQ Level 5 to see the move after this one.";{const ch=$("iqchip");ch.hidden=!(g.iq>=5);if(g.iq>=5)ch.textContent="🧠 Next: "+m.n+" · then "+g.mv[g.queue[0]].n;}
 $("osp").classList.remove("windH","windQ");$("osp").classList.add(g.cur==="heavy"?"windH":"windQ");
 }
 function pop(el,text,color){const p=document.createElement("b");p.className="pop";p.textContent=text;p.style.color=text[0]==="-"?"#B3261E":"#0F1B2D";p.style.textShadow="0 0 4px #FFF,0 0 4px #FFF";p.style.left=el.offsetLeft+el.offsetWidth/2-20+"px";p.style.top=el.offsetTop+"px";$("arena").appendChild(p);p.animate([{transform:"translateY(0)",opacity:1},{transform:"translateY(-44px)",opacity:0}],{duration:900*T}).finished.then(()=>p.remove());}
-function flash(el){el.animate([{filter:"brightness(1)",transform:"translateX(0)"},{filter:"brightness(2)",transform:"translateX(-6px)"},{filter:"brightness(1)",transform:"translateX(6px)"},{filter:"brightness(1)",transform:"translateX(0)"}],{duration:260*T});}
+function flash(el){try{if(el&&el.id==="psp"&&document.body.classList.contains("infight")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)$("arena").animate([{transform:"translate(0,0)"},{transform:"translate(-5px,2px)"},{transform:"translate(5px,-2px)"},{transform:"translate(-3px,1px)"},{transform:"translate(0,0)"}],{duration:260});}catch(e){}el.animate([{filter:"brightness(1)",transform:"translateX(0)"},{filter:"brightness(2)",transform:"translateX(-6px)"},{filter:"brightness(1)",transform:"translateX(6px)"},{filter:"brightness(1)",transform:"translateX(0)"}],{duration:260*T});}
 function seq(el,pull,x,y,s0){const lunge=140,hold=120,back=300,tot=pull+lunge+hold+back,p=`translate(${-x*.18}px,${-y*.16}px) scale(${s0})`,l=`translate(${x}px,${y}px) scale(1.1)`,z="translate(0,0) scale(1)";
 return el.animate([{transform:z,offset:0},{transform:p,offset:pull/tot},{transform:l,offset:(pull+lunge)/tot},{transform:l,offset:(pull+lunge+hold)/tot},{transform:z,offset:1}],{duration:tot*T,easing:"ease-in-out"});}
 async function play(choice){
 if(!g||g.busy||!g.active)return;g.busy=true;g.last=choice;btns.forEach(b=>b.disabled=true);
 $("osp").classList.remove("windH","windQ");
 const m=g.mv[g.cur],L=[],me=CH[g.me].n,op=CH[g.o].n;
-L.push(g.first?me+"’s Speed "+g.sp+" beats "+op+"’s "+g.os+", so "+me+" moves first.":op+" moves first (Speed "+g.os+" vs "+g.sp+").");
+if(choice==="strong")L.push("Strong attacks are slow, so "+op+" goes first.");else L.push(g.first?me+" is faster, so moves first.":op+" is faster, so moves first.");
 const pAct=async()=>{
-if(choice!=="strike")return;
+if(choice!=="strike"&&choice!=="strong")return;const strong=choice==="strong";
 const a=seq($("psp"),120,100,0,1.04);await sleep(260);
-const crit=Math.random()*100<g.crit,d=crit?Math.round(g.strike*1.5):g.strike;
-g.eh=Math.max(0,g.eh-d);pop($("osp"),"-"+d,"var(--hit)");flash($("osp"));renderF();L.push(me+" Strike hits for "+d+(crit?" (Focus crit!)":"")+".");await a.finished;
+const base=strong?Math.round(g.strike*1.6):g.strike,crit=Math.random()*100<g.crit,d=crit?Math.round(base*1.5):base;
+g.eh=Math.max(0,g.eh-d);pop($("osp"),"-"+d,"var(--hit)");flash($("osp"));renderF();L.push(me+(strong?" Strong attack":" Fast attack")+" hits for "+d+(crit?" (Focus crit!)":"")+".");await a.finished;
 };
 const oAct=async()=>{
 const dodge=choice==="sidestep"&&g.cur==="heavy";
@@ -686,13 +788,13 @@ if(choice==="guard")$("shield").classList.add("on");
 const a=seq($("osp"),m.w,-100,0,1.08);
 if(dodge)$("psp").animate([{transform:"translate(0,0)"},{transform:"translate(-8px,-46px)"},{transform:"translate(0,0)"}],{duration:420*T,delay:(m.w-60)*T,easing:"ease-in-out"});
 await sleep(m.w+140);
-if(dodge){pop($("psp"),"Dodged!","var(--text)");L.push(me+" sidesteps "+m.n+".");}
+if(dodge){pop($("psp"),"Dodged!","var(--text)");L.push(me+" dodges "+m.n+".");}
 else{const d=choice==="guard"?Math.round(m.dmg*(1-g.pct/100)):m.dmg;g.ph=Math.max(0,g.ph-d);
 pop($("psp"),"-"+d,"var(--hit)");flash($("psp"));renderF();
-L.push(choice==="guard"?me+" guards and takes "+d+".":choice==="sidestep"?"Quick Hook catches the sidestep for "+d+".":m.n+" hits for "+d+".");}
+L.push(choice==="guard"?me+" blocks and takes "+d+".":choice==="sidestep"?"Quick Hook catches the dodge for "+d+".":m.n+" hits for "+d+".");}
 await a.finished;$("shield").classList.remove("on");
 };
-for(const step of g.first?[pAct,oAct]:[oAct,pAct]){await step();if(g.eh<=0||g.ph<=0)break;}
+for(const step of (g.first&&choice!=="strong")?[pAct,oAct]:[oAct,pAct]){await step();if(g.eh<=0||g.ph<=0)break;}
 $("flog").textContent=L.join(" ");
 if(g.eh<=0||g.ph<=0){finish(g.eh<=0);return;}
 g.round++;telegraph();renderF();openBtns();g.busy=false;
@@ -707,15 +809,21 @@ if(after>before)t+=" Rank up: "+R[after][0]+"!";
 $("endp").textContent=t;$("end").hidden=false;$("endbtn").focus();
 }
 $("endbtn").onclick=()=>{$("end").hidden=true;$("battle").hidden=true;$("pre").hidden=false;$("rank").hidden=false;$("bn-idle").hidden=false;$("bn-hp").hidden=true;renderPre();renderLB();};
-btns.forEach(b=>b.onclick=()=>play(b.dataset.m));
+btns.forEach(b=>b.onclick=()=>play(b.dataset.m));try{$("arena").appendChild(document.querySelector(".btns"));}catch(e){}
+
+(function(){const fp=$("fight");const sync=()=>{document.body.classList.toggle("onfight",!fp.hidden);};
+try{new MutationObserver(sync).observe(fp,{attributes:true,attributeFilter:["hidden"]});}catch(e){}sync();})();
+(function(){const bt=$("battle");const sync=()=>{const on=!bt.hidden;if(document.body.classList.contains("infight")!==on){document.body.classList.toggle("infight",on);window.scrollTo(0,0);}};
+try{new MutationObserver(sync).observe(bt,{attributes:true,attributeFilter:["hidden"]});}catch(e){}sync();})();
+
 render();renderPre();renderLB();
 
 function cnote(t){try{$("cnote").textContent=t;}catch(e){}}
 function pushCloud(){if(!sb||!myId)return;clearTimeout(pushT);pushT=setTimeout(doPush,1200);}
 async function doPush(){if(!sb||!myId)return;if(pushing){pushAgain=true;return;}pushing=true;
 try{const sv=JSON.stringify(st);if(sv!==lastSave){const r=await sb.from("saves").upsert({id:myId,data:st,updated:new Date(st._t||Date.now()).toISOString()});if(!r.error)lastSave=sv;}
-if(prof&&!prof.offline){const p={id:myId,name:prof.name,champ:prof.champ||"dash",rp:Math.max(0,st.rp|0),wins:st.wins|0,losses:st.losses|0,updated:new Date().toISOString()};const pj=JSON.stringify([p.name,p.champ,p.rp,p.wins,p.losses]);
-if(pj!==lastPlayer){const r=await sb.from("players").upsert(p);if(!r.error)lastPlayer=pj;}}}
+if(prof&&!prof.offline){const p={id:myId,name:prof.name,champ:prof.champ||"dash",rp:Math.max(0,st.rp|0),wins:st.wins|0,losses:st.losses|0,wk:wkKey(),wk_min:myWeekMin(),updated:new Date().toISOString()};const pj=JSON.stringify([p.name,p.champ,p.rp,p.wins,p.losses,p.wk,p.wk_min]);
+if(pj!==lastPlayer){let r=await sb.from("players").upsert(p);if(r.error&&/wk/.test(String(r.error.message||""))){delete p.wk;delete p.wk_min;r=await sb.from("players").upsert(p);}if(!r.error)lastPlayer=pj;}}}
 catch(e){}
 pushing=false;if(pushAgain){pushAgain=false;doPush();}}
 function okSave(r){return r&&typeof r.tickets==="number"&&typeof r.rp==="number"&&r.dash&&r.crank&&r.jam&&S.every(s=>typeof r.dash.xp[s.k]==="number"&&typeof r.crank.xp[s.k]==="number"&&r.dash.today&&r.crank.today);}
@@ -724,7 +832,7 @@ let lbBusy=false;
 async function loadLB(){if(!sb||lbBusy)return;lbBusy=true;try{const r=await within(sb.from("players").select("id,name,champ,rp").order("rp",{ascending:false}).limit(50),10000);
 if(r&&r.data){others=r.data.filter(x=>x.id!==myId).map(x=>({name:String(x.name||"Player").slice(0,16),champ:String(x.champ||"dash"),rp:Math.max(0,Number(x.rp)||0)}));renderLB();}}catch(e){}lbBusy=false;}
 async function finishLogin(user,isNew){
-myId=user.id;const md=user.user_metadata||{};
+try{famReset();}catch(e){}myId=user.id;const md=user.user_metadata||{};
 const [pr,sr]=await Promise.all([sb.from("players").select("name,champ").eq("id",myId).maybeSingle(),sb.from("saves").select("data,updated").eq("id",myId).maybeSingle()]);
 const sameUser=prof&&prof.id===myId;
 if(pr.data){prof={id:myId,name:String(pr.data.name),champ:CH[pr.data.champ]?pr.data.champ:"dash"};}
