@@ -208,6 +208,7 @@ body.infight main{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))!im
 
 #clan p.note:empty{display:none}
 .fcode{font:700 34px "Space Grotesk",system-ui,sans-serif;letter-spacing:.18em;text-align:center;background:var(--track);border-radius:16px;padding:14px 8px;user-select:all;-webkit-user-select:all}
+.end button.endsec{background:transparent;color:var(--muted);border:2px solid var(--track)}
 .end button{height:52px;border:0;border-radius:26px;background:var(--lime);color:#0F1B2D;font:700 17px "Space Grotesk",system-ui,sans-serif;cursor:pointer}
 </style>
 </head>
@@ -236,7 +237,7 @@ body.infight main{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))!im
 <div class="bhp" id="bn-hp" hidden><div><div class="name"><span id="pname"></span><small id="pspd"></small></div><div class="bar"><div id="pbar"></div></div><div class="hp" id="php"></div></div>
 <div><div class="name"><span id="ename"></span><small id="round"></small></div><div class="bar"><div id="ebar"></div></div><div class="hp" id="ehp"></div></div></div></div>
 <div class="spr" id="osp"></div><div class="spr" id="psp"></div><div id="iqchip" hidden></div></section>
-<section class="card" id="pre"><h3>Ranked battle</h3><p class="sub" style="margin:0">Win: +25 RP and +15 coins. Lose: −10 RP.</p><button class="go" id="fbtn">Fight (1 ticket)</button><p id="fnote" aria-live="polite"></p><details><summary>How fights work</summary><div class="cmp" id="cmp"></div><p class="note" style="margin:8px 0 0">Fast attack: a normal hit. Strong attack: hits much harder but always goes last. Block: take less damage (IQ makes it stronger). Dodge: avoids Heavy Swings completely, but not Quick Hooks. You can’t use the same move twice in a row. Speed decides who moves first, Strength hits harder, Stamina adds HP, Focus gives a chance of a big hit, and IQ Level 5 shows the opponent’s next moves.</p></details><p class="note" id="rec" style="margin:0"></p></section>
+<section class="card" id="pre"><h3>Ranked battle</h3><p class="sub" style="margin:0">Win: +25 RP and +15 coins. 3 free fight tickets every day. Bronze opponents go easy on you.</p><button class="go" id="fbtn">Fight (1 ticket)</button><p id="fnote" aria-live="polite"></p><details><summary>How fights work</summary><div class="cmp" id="cmp"></div><p class="note" style="margin:8px 0 0">Fast attack: a normal hit. Strong attack: hits much harder but always goes last. Block: take less damage (IQ makes it stronger). Dodge: avoids Heavy Swings completely, but not Quick Hooks. You can’t use the same move twice in a row. Speed decides who moves first, Strength hits harder, Stamina adds HP, Focus gives a chance of a big hit, and IQ Level 5 shows the opponent’s next moves.</p></details><p class="note" id="rec" style="margin:0"></p></section>
 <div id="battle" hidden>
 <section class="intent"><div class="tag" id="mvtag"></div><div id="mvname"></div><div id="mvdesc"></div><div id="mvnext"></div></section>
 <div class="pick">Pick your response</div>
@@ -286,7 +287,7 @@ body.infight main{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))!im
 </div></div>
 <div class="end" id="wel" hidden><div><div class="sut">STEP 2 OF 2</div><h2 id="welh">Welcome to Yard Champs</h2><ol class="how"><li><b>Do something real.</b> Run, lift, read, cycle or sleep.</li><li><b>Log it.</b> Your character levels up.</li><li><b>Fight.</b> Earn tickets by training, then battle the computer.</li></ol><button id="welgo">Let’s go</button></div></div>
 <div class="end co" id="co" hidden><div id="cob"></div></div>
-<div class="end" id="end" hidden><div><h2 id="endt"></h2><p id="endp"></p><button id="endbtn">Done</button></div></div>
+<div class="end" id="end" hidden><div><h2 id="endt"></h2><p id="endp"></p><button id="againbtn" hidden>Fight again</button><button id="endbtn" class="endsec">Done</button></div></div>
 <script>
 const $=id=>document.getElementById(id);
 const rm=matchMedia("(prefers-reduced-motion: reduce)").matches,T=rm?0.05:1;
@@ -410,11 +411,11 @@ const CH={dash:{n:"Dash",o:"crank",w:156,d:"Starts fast, hits light",b:{speed:3,
 const MAX=20,CAP=60,KEY="sidekick-v5",xpAt=L=>15*(L-1)*L/2,day=()=>new Date().toLocaleDateString("en-CA");
 const Z=()=>Object.fromEntries(S.map(s=>[s.k,0]));
 const mk=c=>({xp:Object.fromEntries(S.map(s=>[s.k,xpAt(CH[c].b[s.k])])),today:Z(),log:[]});
-const fresh=()=>({day:day(),streak:0,last:"",shield:1,tickets:1,rem:0,wins:0,losses:0,rp:0,energy:100,slept:"",coins:0,skin:{dash:"orig",crank:"orig",jam:"orig"},owned:{dash:["orig"],crank:["orig"],jam:["orig"]},acc:{dash:{},crank:{},jam:{}},dash:mk("dash"),crank:mk("crank"),jam:mk("jam")});
+const fresh=()=>({day:day(),streak:0,last:"",shield:1,tickets:3,rem:0,wins:0,losses:0,rp:0,energy:100,slept:"",coins:0,skin:{dash:"orig",crank:"orig",jam:"orig"},owned:{dash:["orig"],crank:["orig"],jam:["orig"]},acc:{dash:{},crank:{},jam:{}},dash:mk("dash"),crank:mk("crank"),jam:mk("jam")});
 let sb=null,myId=null,others=[],pushT=null,pushing=false,pushAgain=false,lastSave="",lastPlayer="";
 let st=fresh(),who="dash",act="speed",mins=15,hrs=8,g=null;
 try{const r=JSON.parse(localStorage.getItem(KEY));if(r&&typeof r.tickets==="number"&&typeof r.rp==="number"&&r.dash&&r.crank&&S.every(s=>typeof r.dash.xp[s.k]==="number"&&typeof r.crank.xp[s.k]==="number"&&r.dash.today&&r.crank.today))st=r;}catch(e){}
-function rollover(){if(st.day!==day()){st.day=day();st.energy=Math.min(100,st.energy+30);for(const c of["dash","crank","jam"])st[c].today=Z();}}
+function rollover(){if(!st.tk3){st.tk3=1;st.tickets=Math.max(st.tickets,3);}if(st.day!==day()){st.day=day();st.energy=Math.min(100,st.energy+30);st.tickets=Math.max(st.tickets,3);for(const c of["dash","crank","jam"])st[c].today=Z();}}
 if(!st.accOwned)st.accOwned=[];if(!st.acc)st.acc={dash:{},crank:{}};if(typeof st.energy!=="number")st.energy=100;if(typeof st.slept!=="string")st.slept="";if(typeof st.coins!=="number")st.coins=30;if(!st.skin)st.skin={dash:"orig",crank:"orig"};if(!st.owned)st.owned={dash:["orig"],crank:["orig"]};
 if(!st.jam)st.jam=mk("jam");st.skin.jam=st.skin.jam||"orig";st.owned.jam=st.owned.jam||["orig"];st.acc.jam=st.acc.jam||{};
 if(st.accOwned.includes("phones")){st.accOwned=st.accOwned.filter(x=>x!=="phones");st.coins+=120;}
@@ -520,7 +521,7 @@ $("cmp").innerHTML="";
 [[who,"You"],[o,"Opponent"]].forEach(([c,t])=>{const d=document.createElement("div");d.textContent=t+" ("+CH[c].n+"): "+L(c);$("cmp").append(d);});
 const first=lv(who,"speed")>lv(o,"speed");
 const d=document.createElement("div");d.className="sub";d.textContent=first?CH[who].n+" moves first.":CH[o].n+" moves first. Train Speed to change that.";$("cmp").append(d);
-$("fbtn").disabled=st.tickets<1;$("fnote").textContent=st.tickets<1?"No tickets. Train for 30 minutes to earn one.":"";
+$("fbtn").disabled=st.tickets<1;$("fnote").textContent=st.tickets<1?"Out of tickets. You get 3 free ones tomorrow, or train for 30 minutes to earn one now.":"";
 $("rec").textContent="Record: "+st.wins+" wins, "+st.losses+" losses";renderTop();
 }
 function renderLB(){
@@ -568,7 +569,7 @@ d.append(b);box.append(d);});}
 
 
 /* auto-update: reload when a newer version is uploaded */
-const APP_VER="2026-11-11-1540";
+const APP_VER="2026-11-11-1605";
 async function checkUpdate(){try{if(location.protocol.indexOf("http")!==0)return;if(g&&g.active)return;
 const r=await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"});if(!r.ok)return;const t=await r.text();
 const m=t.match(/const APP_VER="([^"]+)"/);if(m&&m[1]!==APP_VER){const k="yc-upd-"+m[1];try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1");}catch(e){}
@@ -760,7 +761,7 @@ const o=CH[who].o,P=k=>lv(who,k),O=k=>lv(o,k);
 const mp=46+4*P("stamina"),mo=46+4*O("stamina");
 g={me:who,o,ph:mp,eh:mo,mp,mo,round:1,busy:false,active:true,queue:[rnd(),rnd()],iq:P("iq"),
 sp:P("speed"),os:O("speed"),strike:8+2*P("strength"),pct:Math.min(80,50+2*(P("iq")-1)),crit:Math.min(50,5*P("focus")),
-mv:{heavy:{n:"Heavy Swing",dmg:6+2*O("strength"),w:450,d:"Slow wind-up, "},quick:{n:"Quick Hook",dmg:5+O("strength"),w:150,d:"Fast jab, "}}};
+mv:{heavy:{n:"Heavy Swing",dmg:Math.round((6+2*O("strength"))*(rk(st.rp)===0?.8:1)),w:450,d:"Slow wind-up, "},quick:{n:"Quick Hook",dmg:Math.round((5+O("strength"))*(rk(st.rp)===0?.8:1)),w:150,d:"Fast jab, "}}};
 g.first=g.sp>g.os;setLock(true);
 $("pre").hidden=true;$("rank").hidden=true;$("bn-idle").hidden=true;$("bn-hp").hidden=false;$("battle").hidden=false;$("end").hidden=true;
 $("ename").textContent=CH[o].n;$("pname").textContent=CH[who].n;$("pspd").textContent="Speed "+g.sp;
@@ -809,15 +810,15 @@ g.round++;telegraph();renderF();openBtns();g.busy=false;
 }
 function finish(win){
 g.active=false;setLock(false);const before=rk(st.rp);
-if(win){st.wins++;st.rp+=25;st.coins+=15;}else{st.losses++;st.rp=Math.max(0,st.rp-10);}
+const safe=rk(st.rp)===0;if(win){st.wins++;st.rp+=25;st.coins+=15;}else{st.losses++;st.coins+=5;if(!safe)st.rp=Math.max(0,st.rp-10);}
 const after=rk(st.rp);save();
 $("endt").textContent=win?CH[g.me].n+" wins!":CH[g.o].n+" wins this round";
-let t=(win?"+25 RP and +15 coins. ":"−10 RP. ")+(win?"Train to earn tickets for the next fight.":"Sidestep the heavy hits, strike on the quick ones, or train a stat first.");
+let t=(win?"+25 RP and +15 coins. ":(safe?"No RP lost in Bronze, and +5 coins for trying. ":"−10 RP, +5 coins for trying. "))+(win?"Train to earn tickets for the next fight.":"Tip: Dodge the slow glowing Heavy Swings, and hit back when you see the fast shake of a Quick Hook.");
 if(after>before)t+=" Rank up: "+R[after][0]+"!";
-$("endp").textContent=t;$("end").hidden=false;$("endbtn").focus();
+$("endp").textContent=t;$("end").hidden=false;{const ab=$("againbtn");ab.hidden=st.tickets<1;ab.textContent="Fight again ("+st.tickets+(st.tickets===1?" ticket left)":" tickets left)");}($("againbtn").hidden?$("endbtn"):$("againbtn")).focus();
 }
 $("endbtn").onclick=()=>{$("end").hidden=true;$("battle").hidden=true;$("pre").hidden=false;$("rank").hidden=false;$("bn-idle").hidden=false;$("bn-hp").hidden=true;renderPre();renderLB();};
-btns.forEach(b=>b.onclick=()=>play(b.dataset.m));try{$("arena").appendChild(document.querySelector(".btns"));}catch(e){}
+btns.forEach(b=>b.onclick=()=>play(b.dataset.m));$("againbtn").onclick=()=>{$("endbtn").click();if(st.tickets>0)$("fbtn").click();};try{$("arena").appendChild(document.querySelector(".btns"));}catch(e){}
 
 (function(){const fp=$("fight");const sync=()=>{document.body.classList.toggle("onfight",!fp.hidden);};
 try{new MutationObserver(sync).observe(fp,{attributes:true,attributeFilter:["hidden"]});}catch(e){}sync();})();
