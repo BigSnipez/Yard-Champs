@@ -148,6 +148,7 @@ details{font-size:14px;color:var(--muted)}summary{cursor:pointer;font-weight:700
 .end>div{background:var(--card);border-radius:24px;padding:28px 24px;max-width:320px;text-align:center;display:flex;flex-direction:column;gap:12px}
 .end h2{font-size:28px}.end p{margin:0;color:var(--muted)}
 .suc{text-align:left!important;max-width:360px!important}.suc h2,.suc>p{text-align:left}.sut{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--muted)}.sul{font-size:14px;font-weight:700;color:var(--text);margin-top:4px}.suerr{color:var(--hit)!important;font-size:14px;min-height:18px}.sun{font-size:13px}.suc3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}#su .suc3 button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60px;height:auto!important;border-radius:16px!important;background:transparent;border:2px solid var(--muted)!important;color:var(--text)}#su .suc3 button[aria-pressed="true"]{background:var(--lime);border-color:var(--lime)!important;color:#0F1B2D}.suc3 button[aria-pressed="true"] small{color:#0F1B2D}#sugo:disabled,#ligo:disabled{opacity:.45;cursor:default}.suc>div{display:flex;flex-direction:column;gap:10px}.suc .cin{margin-top:-4px}#su .sulink{background:none;height:auto;min-height:40px;color:var(--muted);text-decoration:underline;font-weight:500;font-size:15px;border:0}.suc{max-height:calc(100dvh - 48px);overflow-y:auto}.acct{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:8px}.acct button{background:none;border:0;color:var(--muted);font:500 14px "Space Grotesk",system-ui,sans-serif;text-decoration:underline;cursor:pointer;min-height:44px}#cbtn{margin-top:8px;width:100%}
+#store{display:none!important}#outw .wnone{text-align:center;padding:26px 18px;grid-column:1/-1;align-items:center}
 .end button{height:52px;border:0;border-radius:26px;background:var(--lime);color:#0F1B2D;font:700 17px "Space Grotesk",system-ui,sans-serif;cursor:pointer}
 </style>
 </head>
@@ -165,7 +166,7 @@ details{font-size:14px;color:var(--muted)}summary{cursor:pointer;font-weight:700
 <button class="go" id="go">Log activity</button><p id="msg" aria-live="polite"></p></section>
 <section class="card"><h2>Stats</h2><div id="stats" style="width:100%;display:flex;flex-direction:column;gap:12px"></div></section>
 <section class="card"><h2>Recent activity</h2><ul id="hist"></ul><p class="note" id="empty">Your logged activities will appear here.</p></section>
-<button class="reset" id="reset">Reset everything</button><div class="acct" id="acct"></div>
+<div class="acct" id="acct"></div>
 </div>
 
 <div id="fight" hidden>
@@ -196,13 +197,13 @@ details{font-size:14px;color:var(--muted)}summary{cursor:pointer;font-weight:700
 </div>
 
 <div id="shop" hidden>
-<div class="row"><h3>Cosmetics shop</h3><span class="coins" id="coins"></span></div>
+<div class="row"><h3>Wardrobe</h3><span class="coins" id="coins"></span></div>
 <div class="msw" id="msw"><button data-sm="skin" aria-pressed="true">Colourways</button><button data-sm="out" aria-pressed="false">Outfits</button></div>
 <div id="skinsw"><section class="card hero"><div id="ssp"></div><h2 id="sname"></h2><button class="go" id="sbtn" style="width:100%"></button><p class="note" id="smsg" aria-live="polite" style="margin:0"></p></section>
 <div class="sk" id="sk"></div></div>
 <div id="outw" hidden><section class="card hero"><div id="asp"></div><h2 id="aname"></h2><button class="go" id="abtn" style="width:100%"></button><p class="note" id="amsg" aria-live="polite" style="margin:0"></p></section><div class="sk" id="ak"></div></div>
 <section class="card" id="store"><h3 style="margin:0 0 4px">Get coins</h3><p class="note" style="margin:0 0 10px">Coins only buy cosmetics. They never make you stronger, and fight tickets still come from training.</p><div id="packs"></div><p class="note" id="pmsg" aria-live="polite" style="margin:8px 0 0">Tapping a pack opens checkout. Until payments are connected, it is a demo and no real payment is taken.</p></section>
-<p class="note" style="margin:0">Earn 15 coins per ranked win. Colourways are cosmetic. Fight tickets still come from training.</p>
+<section class="card" id="soon" style="align-items:center;text-align:center;gap:6px;padding:18px 20px"><h3 style="margin:0">🛍️ Shop coming soon</h3><p class="note" style="margin:0">New colourways and outfits are on the way. Keep winning fights: the coins you earn now will be ready to spend when the shop opens.</p></section>
 </div>
 </main>
 <nav class="opts" id="tabs" aria-label="Main"><button data-t="train" aria-pressed="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 5 14h6l-1 7 8-11h-6z"/></svg>Train</button><button data-t="fight" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m14 4 6 6M4 20l9-9M12 6l6 6M8 20l-4-4M3 21l3-1"/><path d="m14 4 3-1 4 4-1 3"/></svg>Fight</button><button data-t="ranks" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3M12 14v4M8 21h8"/></svg>Ranks</button><button data-t="clan" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.6"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M15 14.5c3 0 6 1.5 6 5.5"/></svg>Clan</button><button data-t="shop" aria-pressed="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1 12H5zM8 8a4 4 0 0 1 8 0"/></svg>Shop</button></nav>
@@ -477,7 +478,7 @@ a.textContent=i+1;b.textContent=r.name;sm.textContent=R[rk(r.rp)][0];b.append(sm
 let shopSel=null;
 function renderShop(){
 $("skinsw").hidden=shopMode!=="skin";$("outw").hidden=shopMode!=="out";if(shopMode==="out")renderOut();
-const c=who,cur=st.skin[c];if(!shopSel||!SKINS.some(s=>s.id===shopSel))shopSel=cur;
+const c=who,cur=st.skin[c];if(!shopSel||!st.owned[c].includes(shopSel))shopSel=cur;
 const sk=skFor(shopSel),own=st.owned[c].includes(sk.id);
 $("coins").innerHTML=COINI+st.coins+" coins";
 $("ssp").innerHTML=spr(c,sk.id);$("ssp").style.width=({dash:190,crank:130,jam:160})[c]+"px";
@@ -485,10 +486,10 @@ $("sname").textContent=sk.id==="gold"?"★ Golden Key ★":skName(c,sk);
 const b=$("sbtn");
 if(cur===sk.id){b.textContent="Equipped";b.disabled=true;}
 else if(own){b.textContent="Equip";b.disabled=false;}
-else{b.textContent="Buy for "+sk.price+" coins";b.disabled=st.coins<sk.price;}
-$("smsg").textContent=(!own&&st.coins<sk.price)?"You need "+(sk.price-st.coins)+" more coins.":"";
+else{b.textContent="Coming soon";b.disabled=true;}
+$("smsg").textContent=st.owned[c].length<2?"New colourways arrive when the shop opens.":"";
 const box=$("sk");box.innerHTML="";
-SKINS.filter(s=>!s.excl||st.owned[c].includes(s.id)).forEach(s=>{const d=document.createElement("button");d.setAttribute("aria-pressed",s.id===shopSel);
+SKINS.filter(s=>st.owned[c].includes(s.id)).forEach(s=>{const d=document.createElement("button");d.setAttribute("aria-pressed",s.id===shopSel);
 const i=document.createElement("i");i.style.background=s.dot||({dash:"#4A90E2",crank:"#F0662B",jam:"#8A2A6E"})[c];
 const n=document.createElement("span");n.textContent=skName(c,s);
 const t=document.createElement("small");t.textContent=cur===s.id?"Equipped":st.owned[c].includes(s.id)?"Owned":s.price+" coins";
@@ -566,23 +567,24 @@ $("evhint").onclick=openEvo;
 
 let shopMode="skin",outSel=null;
 const SLOTN={head:"Head",face:"Face",neck:"Neck",back:"Back",feet:"Feet"};
-function renderOut(){const c=who,box=$("ak");const ok=ITEMS.filter(i=>!i.for||i.for.includes(c));
+function renderOut(){const c=who,box=$("ak");const ok=ITEMS.filter(i=>(!i.for||i.for.includes(c))&&st.accOwned.includes(i.id));
+const hero=$("asp").parentNode;hero.hidden=!ok.length;if(!ok.length){box.innerHTML="";const e=el("section","card wnone");e.append(el("h3",null,"No outfits yet"),el("p","note","Outfits for "+CH[c].n+" arrive when the shop opens."));box.append(e);return;}
 if(!outSel||!ok.some(i=>i.id===outSel))outSel=ok[0].id;
 const it=ITEMS.find(i=>i.id===outSel),own=st.accOwned.includes(it.id),worn=st.acc[c][it.slot]===it.id;
 const pv=Object.assign({},st.acc[c]);pv[it.slot]=it.id;
 $("asp").innerHTML=spr(c,null,null,pv);$("asp").style.width=({dash:190,crank:130,jam:160})[c]+"px";
 $("aname").textContent=it.n+" · "+SLOTN[it.slot];
 const b=$("abtn");b.disabled=false;
-if(worn){b.textContent="Take off";}else if(own){b.textContent="Wear";}else{b.textContent="Buy for "+it.price+" coins";b.disabled=st.coins<it.price;}
-$("amsg").textContent=(!own&&st.coins<it.price)?"You need "+(it.price-st.coins)+" more coins.":(it.id==="kicks"?"":c==="dash"&&it.slot==="feet"?"":"");
+if(worn){b.textContent="Take off";}else if(own){b.textContent="Wear";}else{b.textContent="Coming soon";b.disabled=true;}
+$("amsg").textContent=(it.id==="kicks"?"":c==="dash"&&it.slot==="feet"?"":"");
 box.innerHTML="";
-ITEMS.forEach(i=>{const d=document.createElement("button");const off=i.for&&!i.for.includes(c);d.disabled=!!off;d.setAttribute("aria-pressed",i.id===outSel);
+ok.forEach(i=>{const d=document.createElement("button");const off=false;d.disabled=!!off;d.setAttribute("aria-pressed",i.id===outSel);
 const dot=document.createElement("i");dot.style.background=i.dot;const n=document.createElement("span");n.textContent=i.n;
 const t=document.createElement("small");t.textContent=off?"Not for "+CH[c].n:st.acc[c][i.slot]===i.id?"Wearing":st.accOwned.includes(i.id)?"Owned":i.price+" coins";
 d.append(dot,n,t);d.onclick=()=>{outSel=i.id;renderOut();};box.append(d);});}
 $("abtn").onclick=()=>{const c=who,it=ITEMS.find(i=>i.id===outSel);if(!it)return;
 if(st.acc[c][it.slot]===it.id){delete st.acc[c][it.slot];}
-else{if(!st.accOwned.includes(it.id)){if(st.coins<it.price)return;st.coins-=it.price;st.accOwned.push(it.id);}st.acc[c][it.slot]=it.id;}
+else{if(!st.accOwned.includes(it.id))return;st.acc[c][it.slot]=it.id;}
 save();renderTop();renderShop();render();if(!(g&&g.active))renderPre();};
 pick($("msw"),"sm",v=>{shopMode=v;renderShop();});
 function bumpStreak(){
@@ -595,7 +597,7 @@ pick($("tabs"),"t",v=>{window.scrollTo(0,0);$("train").hidden=v!=="train";$("fig
 pick($("who"),"w",v=>{who=v;shopSel=null;$("msg").textContent="";render();if(!(g&&g.active))renderPre();renderLB();renderShop();});
 $("sbtn").onclick=()=>{const c=who,id=shopSel,sk=skFor(id);
 if(st.skin[c]===id)return;
-if(!st.owned[c].includes(id)){if(st.coins<sk.price)return;st.coins-=sk.price;st.owned[c].push(id);}
+if(!st.owned[c].includes(id))return;
 st.skin[c]=id;save();renderShop();render();if(!(g&&g.active))renderPre();};
 pick($("acts"),"a",v=>{act=v;const sl=v==="sleep";$("mwrap").hidden=sl;$("hours").hidden=!sl;$("go").textContent=sl?"Log sleep":"Log activity";$("msg").textContent="";});
 pick($("hours"),"h",v=>hrs=+v);
@@ -636,7 +638,7 @@ t+=bumpStreak();save();render();$("msg").textContent=t;
 if(!rm){$("hsp").animate([{transform:"translateY(0)"},{transform:"translateY(-14px)"},{transform:"translateY(0)"}],{duration:400,easing:"ease-out"});
 if(i.L>before)$("v-"+act).animate([{transform:"scale(1)"},{transform:"scale(1.4)"},{transform:"scale(1)"}],{duration:450});}
 };
-$("reset").onclick=()=>{st=fresh();shopSel=null;save();render();renderPre();renderLB();$("msg").textContent="Everything is back to the start.";};
+
 /* Fight */
 const rnd=()=>Math.random()<.5?"heavy":"quick";
 const btns=[...document.querySelectorAll(".btns button")];
