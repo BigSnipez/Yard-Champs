@@ -121,7 +121,7 @@ li{display:flex;justify-content:space-between}li span:last-child{color:var(--mut
 .lhead{display:flex;gap:12px;align-items:center}.lhead #hsp{flex:none}.lt{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}.lt h3{font-size:22px}.lt .hdesc{text-align:left}
 .enl{display:flex;justify-content:space-between;font-size:14px;font-weight:700}
 .logc h2{font-size:17px}
-#mins{display:grid;grid-template-columns:repeat(4,1fr) 1.3fr;gap:8px}#mins input{min-width:0;height:48px;border-radius:16px;border:2px solid var(--muted);background:var(--track);color:var(--text);font:700 16px "Space Grotesk",system-ui,sans-serif;text-align:center}
+#mins{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.mother{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--muted);font-weight:500}.mother input{width:96px;height:48px;box-sizing:border-box;border-radius:14px;border:2px solid var(--muted);background:var(--track);color:var(--text);font:700 18px "Space Grotesk",system-ui,sans-serif;text-align:center}.mother input:focus{border-color:var(--lime);outline:none}#mins input{min-width:0;height:48px;border-radius:16px;border:2px solid var(--muted);background:var(--track);color:var(--text);font:700 16px "Space Grotesk",system-ui,sans-serif;text-align:center}
 .go{height:56px;font-size:18px}
 .stat{gap:4px}.stat .row{font-size:15px}.stat .row em{font-size:15px}.stat .bar{height:8px}.stat .bar div{height:8px}.stat .sub{font-size:12.5px}
 details{font-size:14px;color:var(--muted)}summary{cursor:pointer;font-weight:700;min-height:32px}
@@ -221,7 +221,7 @@ body.infight main{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))!im
 <section class="card logc"><div class="lhead"><div id="hsp"></div><div class="lt"><h3 id="hname"></h3><p class="hdesc" id="hdesc"></p><button class="evb" id="evhint" type="button">See evolutions</button><div class="enl"><span>Energy</span><b id="enval"></b></div><div class="bar"><div id="enbar" style="background:var(--lime)"></div></div><div class="sub" id="entxt"></div></div></div>
 <h2>What did you do?</h2>
 <div class="opts act" id="acts"><button data-a="speed" aria-pressed="true">Run<small>Speed</small></button><button data-a="strength" aria-pressed="false">Lift<small>Strength</small></button><button data-a="iq" aria-pressed="false">Read<small>IQ</small></button><button data-a="stamina" aria-pressed="false">Cycle<small>Stamina</small></button><button data-a="sleep" aria-pressed="false">Sleep<small>Recover</small></button></div>
-<div class="col" id="mwrap"><h2>For how long?</h2><div class="opts" id="mins"><button data-m="15" aria-pressed="true">15</button><button data-m="30" aria-pressed="false">30</button><button data-m="45" aria-pressed="false">45</button><button data-m="60" aria-pressed="false">60</button><input id="minin" type="number" inputmode="numeric" min="1" max="240" value="15" aria-label="Custom minutes" placeholder="min"></div></div>
+<div class="col" id="mwrap"><h2>For how long?</h2><div class="opts" id="mins"><button data-m="10" aria-pressed="false">10</button><button data-m="20" aria-pressed="true">20</button><button data-m="30" aria-pressed="false">30</button><button data-m="45" aria-pressed="false">45</button><button data-m="60" aria-pressed="false">60</button></div><label class="mother" for="minin">Other amount<input id="minin" type="number" inputmode="numeric" min="1" max="240" value="" placeholder="e.g. 25">minutes</label></div>
 <div class="col" id="hwrap"><div class="opts" id="hours" hidden><button data-h="6" aria-pressed="false">6 h</button><button data-h="7" aria-pressed="false">7 h</button><button data-h="8" aria-pressed="true">8 h</button><button data-h="9" aria-pressed="false">9 h</button></div></div>
 <button class="go" id="go">Log activity</button><p id="msg" aria-live="polite"></p></section>
 <section class="card"><h2>Stats</h2><div id="stats" style="width:100%;display:flex;flex-direction:column;gap:12px"></div></section>
@@ -413,7 +413,7 @@ const Z=()=>Object.fromEntries(S.map(s=>[s.k,0]));
 const mk=c=>({xp:Object.fromEntries(S.map(s=>[s.k,xpAt(CH[c].b[s.k])])),today:Z(),log:[]});
 const fresh=()=>({day:day(),streak:0,last:"",shield:1,tickets:3,rem:0,wins:0,losses:0,rp:0,energy:100,slept:"",coins:0,skin:{dash:"orig",crank:"orig",jam:"orig"},owned:{dash:["orig"],crank:["orig"],jam:["orig"]},acc:{dash:{},crank:{},jam:{}},dash:mk("dash"),crank:mk("crank"),jam:mk("jam")});
 let sb=null,myId=null,others=[],pushT=null,pushing=false,pushAgain=false,lastSave="",lastPlayer="";
-let st=fresh(),who="dash",act="speed",mins=15,hrs=8,g=null;
+let st=fresh(),who="dash",act="speed",mins=20,hrs=8,g=null;
 try{const r=JSON.parse(localStorage.getItem(KEY));if(r&&typeof r.tickets==="number"&&typeof r.rp==="number"&&r.dash&&r.crank&&S.every(s=>typeof r.dash.xp[s.k]==="number"&&typeof r.crank.xp[s.k]==="number"&&r.dash.today&&r.crank.today))st=r;}catch(e){}
 function rollover(){if(!st.tk3){st.tk3=1;st.tickets=Math.max(st.tickets,3);}if(st.day!==day()){st.day=day();st.energy=Math.min(100,st.energy+30);st.tickets=Math.max(st.tickets,3);for(const c of["dash","crank","jam"])st[c].today=Z();}}
 if(!st.accOwned)st.accOwned=[];if(!st.acc)st.acc={dash:{},crank:{}};if(typeof st.energy!=="number")st.energy=100;if(typeof st.slept!=="string")st.slept="";if(typeof st.coins!=="number")st.coins=30;if(!st.skin)st.skin={dash:"orig",crank:"orig"};if(!st.owned)st.owned={dash:["orig"],crank:["orig"]};
@@ -569,7 +569,7 @@ d.append(b);box.append(d);});}
 
 
 /* auto-update: reload when a newer version is uploaded */
-const APP_VER="2026-11-11-1605";
+const APP_VER="2026-11-11-1612";
 async function checkUpdate(){try{if(location.protocol.indexOf("http")!==0)return;if(g&&g.active)return;
 const r=await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"});if(!r.ok)return;const t=await r.text();
 const m=t.match(/const APP_VER="([^"]+)"/);if(m&&m[1]!==APP_VER){const k="yc-upd-"+m[1];try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,"1");}catch(e){}
@@ -713,11 +713,11 @@ st.skin[c]=id;save();renderShop();render();if(!(g&&g.active))renderPre();};
 pick($("acts"),"a",v=>{act=v;const sl=v==="sleep";$("mwrap").hidden=sl;$("hours").hidden=!sl;$("go").textContent=sl?"Log sleep":"Log activity";$("msg").textContent="";});
 pick($("hours"),"h",v=>hrs=+v);
 function setMins(v,fromInput){
-mins=v;if(!fromInput)$("minin").value=v;
+mins=v;if(!fromInput)$("minin").value="";
 $("mins").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.m===v));
 }
 $("mins").querySelectorAll("button").forEach(b=>b.onclick=()=>setMins(+b.dataset.m,false));
-$("minin").oninput=()=>{const v=parseInt($("minin").value,10);if(v>=1&&v<=240)setMins(v,true);else mins=0;};
+$("minin").oninput=()=>{const v=parseInt($("minin").value,10);if(v>=1&&v<=240)setMins(v,true);else if($("minin").value==="")setMins(20,false);else mins=0;};
 $("go").onclick=()=>{
 rollover();
 if(act==="sleep"){
