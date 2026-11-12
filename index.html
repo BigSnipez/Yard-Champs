@@ -237,7 +237,7 @@ body.infight main{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))!im
 <div class="bhp" id="bn-hp" hidden><div><div class="name"><span id="pname"></span><small id="pspd"></small></div><div class="bar"><div id="pbar"></div></div><div class="hp" id="php"></div></div>
 <div><div class="name"><span id="ename"></span><small id="round"></small></div><div class="bar"><div id="ebar"></div></div><div class="hp" id="ehp"></div></div></div></div>
 <div class="spr" id="osp"></div><div class="spr" id="psp"></div><div id="iqchip" hidden></div></section>
-<section class="card" id="pre"><h3>Ranked battle</h3><p class="sub" style="margin:0">Win: +25 RP and +15 coins. 3 free fight tickets every day. Bronze opponents go easy on you.</p><button class="go" id="fbtn">Fight (1 ticket)</button><p id="fnote" aria-live="polite"></p><details><summary>How fights work</summary><div class="cmp" id="cmp"></div><p class="note" style="margin:8px 0 0">Fast attack: a normal hit. Strong attack: hits much harder but always goes last. Block: take less damage (IQ makes it stronger). Dodge: avoids Heavy Swings completely, but not Quick Hooks. You can’t use the same move twice in a row. Speed decides who moves first, Strength hits harder, Stamina adds HP, Focus gives a chance of a big hit, and IQ Level 5 shows the opponent’s next moves.</p></details><p class="note" id="rec" style="margin:0"></p></section>
+<section class="card" id="pre"><h3>Ranked battle</h3><p class="sub" style="margin:0">Win: <span id="winrp">+25</span> RP and +15 coins. 3 free fight tickets every day. Bronze opponents go easy on you.</p><button class="go" id="fbtn">Fight (1 ticket)</button><p id="fnote" aria-live="polite"></p><details><summary>How fights work</summary><div class="cmp" id="cmp"></div><p class="note" style="margin:8px 0 0">Fast attack: a normal hit. Strong attack: hits much harder but always goes last. Block: take less damage (IQ makes it stronger). Dodge: avoids Heavy Swings completely, but not Quick Hooks. You can’t use the same move twice in a row. Speed decides who moves first, Strength hits harder, Stamina adds HP, Focus gives a chance of a big hit, and IQ Level 5 shows the opponent’s next moves.</p></details><p class="note" id="rec" style="margin:0"></p></section>
 <div id="battle" hidden>
 <section class="intent"><div class="tag" id="mvtag"></div><div id="mvname"></div><div id="mvdesc"></div><div id="mvnext"></div></section>
 <div class="pick">Pick your response</div>
@@ -253,7 +253,7 @@ body.infight main{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))!im
 <p class="sub" style="margin:0">Real players and computer rivals</p>
 <div class="s3"><div><small>Your position</small><b id="lpos"></b></div><div><small>Rank points</small><b id="lrp"></b></div><div><small>Record</small><b id="lrec"></b></div></div>
 <section class="card" style="padding:12px 14px"><div class="lb" id="lb"></div></section><p class="note" id="cnote" style="margin:4px 4px 0">Checking for online players…</p><button class="sec" id="cbtn" hidden>Create account or log in</button>
-<p class="note" style="margin:0">+25 RP for a win · −10 RP for a loss</p>
+<p class="note" style="margin:0">Wins give less RP and losses cost more as you climb: Bronze +25/−0, Silver +20/−10, Gold +15/−15, Platinum +12/−20, Diamond +10/−25, Champion +8/−30.</p>
 </div>
 
 <div id="shop" hidden>
@@ -426,9 +426,13 @@ function info(xp){let L=1;while(L<MAX&&xp>=15*L*(L+1)/2)L++;const b=xpAt(L);retu
 const lv=(c,k)=>info(st[c].xp[k]).L;
 function pick(group,attr,fn){group.querySelectorAll("button").forEach(b=>b.onclick=()=>{group.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));fn(b.dataset[attr]);});}
 $("stats").innerHTML=S.map(s=>`<div class="stat"><div class="row"><span>${s.n}</span><em id="v-${s.k}"></em></div><div class="bar"><div id="b-${s.k}" style="background:${s.c}"></div></div><div class="sub" id="s-${s.k}"></div></div>`).join("");
-const R=[["Bronze",0],["Silver",100],["Gold",200],["Platinum",300]];
+const R=[["Bronze",0],["Silver",250],["Gold",600],["Platinum",1200],["Diamond",2000],["Champion",3500]];
+const WINRP=[25,20,15,12,10,8],LOSSRP=[0,10,15,20,25,30];
 const rk=rp=>{let i=0;while(i<R.length-1&&rp>=R[i+1][1])i++;return i;};
-const RIV=[["Crank",310],["Crash",245],["Peep",150],["Scoot",65],["Skip",15]];
+const RREW=[null,{c:100,t:2},{c:200,t:3},{c:350,t:4},{c:600,t:5},{c:1000,t:10}];
+const rewTxt=r=>r.c+" coins + "+r.t+" fight tickets";
+function claimRanks(b){if(typeof st.rkBest!=="number")st.rkBest=b;const now=rk(st.rp);let out=[];while(st.rkBest<now){st.rkBest++;const r=RREW[st.rkBest];if(r){st.coins+=r.c;st.tickets+=r.t;out.push(R[st.rkBest][0]+" reward: "+rewTxt(r)+"!");}}return out.join(" ");}
+const RIV=[["Crank",2400],["Crash",1300],["Peep",700],["Scoot",300],["Skip",60]];
 const COINI=`<svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="cgA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE38A"/><stop offset="1" stop-color="#E8A425"/></linearGradient></defs><circle cx="24" cy="25" r="21" fill="#0B1030"/><circle cx="24" cy="24" r="19" fill="url(#cgA)" stroke="#0B1030" stroke-width="3"/><circle cx="24" cy="24" r="13.5" fill="none" stroke="#B9770E" stroke-width="2.5" stroke-dasharray="3 2.4"/><g fill="#0B1030"><circle cx="19" cy="18.5" r="4.6"/><circle cx="29" cy="18.5" r="4.6"/><rect x="19" y="16" width="10" height="5"/><rect x="22" y="21" width="4" height="10" rx="1"/><rect x="20" y="28.5" width="8" height="3.5" rx="1"/></g><g fill="#FFD25A"><circle cx="19" cy="18.5" r="1.8"/><circle cx="29" cy="18.5" r="1.8"/></g><path d="M11 17 Q14 9 22 8" stroke="#FFF6C8" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85"/></svg>`;
 const TIXI=`<svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 14 H42 V21 A3.5 3.5 0 0 0 42 28 V35 H6 V28 A3.5 3.5 0 0 0 6 21 Z" fill="#0B1030" transform="translate(0 1.5)"/><path d="M6 12 H42 V19.5 A4 4 0 0 0 42 27.5 V35 H6 V27.5 A4 4 0 0 0 6 19.5 Z" fill="#B8F34A" stroke="#0B1030" stroke-width="3" stroke-linejoin="round"/><path d="M17 15 V32" stroke="#0B1030" stroke-width="2.2" stroke-dasharray="2.5 2.5" opacity=".7"/><polygon points="31,14 24,25 29,25 26,33 36,21 30.5,21 34,14" fill="#2D43C2" stroke="#0B1030" stroke-width="2" stroke-linejoin="round"/><path d="M9 15 H15" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity=".7"/></svg>`;
 function coinBurst(){const n=14;for(let i=0;i<n;i++){const e=document.createElement("div");e.className="fly";e.innerHTML=COINI.replace('class="ic"','style="width:100%;height:100%"');
@@ -511,7 +515,7 @@ c.log.slice(0,5).forEach(l=>{const li=document.createElement("li"),a=document.cr
 $("empty").hidden=c.log.length>0;
 const e=st.energy;$("enbar").style.width=e+"%";$("enval").textContent=e+" / 100";$("entxt").textContent=e>=70?"Rested. Training at full strength.":e>=30?"Getting tired. Rest soon.":e>0?"Tired. Training gains are halved. Log sleep to recover.":"Exhausted. No gains until you sleep.";
 }
-function renderRank(){const i=rk(st.rp),n=R[i+1];$("rname").textContent=R[i][0];$("rp").textContent=st.rp+" RP";$("rbar").style.width=(n?(st.rp-R[i][1])/(n[1]-R[i][1])*100:100)+"%";$("rnext").textContent=n?(n[1]-st.rp)+" RP to "+n[0]:"Top rank";}
+function renderRank(){const i=rk(st.rp),n=R[i+1];try{$("winrp").textContent="+"+WINRP[i];}catch(e){}$("rname").textContent=R[i][0];$("rp").textContent=st.rp+" RP";$("rbar").style.width=(n?(st.rp-R[i][1])/(n[1]-R[i][1])*100:100)+"%";$("rnext").textContent=n?(n[1]-st.rp)+" RP to "+n[0]+((typeof st.rkBest!=="number"||st.rkBest<i+1)&&RREW[i+1]?" · reward: "+rewTxt(RREW[i+1]):""):"Top rank";}
 function renderPre(){
 const o=CH[who].o,L=c=>S.map(s=>s.n+" "+lv(c,s.k)).join(", ");
 $("bn-title").textContent=CH[who].n+" vs "+CH[o].n;renderRank();
@@ -810,11 +814,11 @@ g.round++;telegraph();renderF();openBtns();g.busy=false;
 }
 function finish(win){
 g.active=false;setLock(false);const before=rk(st.rp);
-const safe=rk(st.rp)===0;if(win){st.wins++;st.rp+=25;st.coins+=15;}else{st.losses++;st.coins+=5;if(!safe)st.rp=Math.max(0,st.rp-10);}
-const after=rk(st.rp);save();
+const safe=rk(st.rp)===0,wg=WINRP[before],ls=LOSSRP[before];if(win){st.wins++;st.rp+=wg;st.coins+=15;}else{st.losses++;st.coins+=5;if(!safe)st.rp=Math.max(0,st.rp-ls);}
+const after=rk(st.rp);const rew=claimRanks(before);save();
 $("endt").textContent=win?CH[g.me].n+" wins!":CH[g.o].n+" wins this round";
-let t=(win?"+25 RP and +15 coins. ":(safe?"No RP lost in Bronze, and +5 coins for trying. ":"−10 RP, +5 coins for trying. "))+(win?"Train to earn tickets for the next fight.":"Tip: Dodge the slow glowing Heavy Swings, and hit back when you see the fast shake of a Quick Hook.");
-if(after>before)t+=" Rank up: "+R[after][0]+"!";
+let t=(win?"+"+wg+" RP and +15 coins. ":(safe?"No RP lost in Bronze, and +5 coins for trying. ":"−"+ls+" RP, +5 coins for trying. "))+(win?"Train to earn tickets for the next fight.":"Tip: Dodge the slow glowing Heavy Swings, and hit back when you see the fast shake of a Quick Hook.");
+if(after>before)t+=" Rank up: "+R[after][0]+"!";if(rew)t+=" 🎁 "+rew;
 $("endp").textContent=t;$("end").hidden=false;{const ab=$("againbtn");ab.hidden=st.tickets<1;ab.textContent="Fight again ("+st.tickets+(st.tickets===1?" ticket left)":" tickets left)");}($("againbtn").hidden?$("endbtn"):$("againbtn")).focus();
 }
 $("endbtn").onclick=()=>{$("end").hidden=true;$("battle").hidden=true;$("pre").hidden=false;$("rank").hidden=false;$("bn-idle").hidden=false;$("bn-hp").hidden=true;renderPre();renderLB();};
