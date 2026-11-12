@@ -73,6 +73,24 @@ li{display:flex;justify-content:space-between}li span:last-child{color:var(--mut
 @keyframes windH{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(10px,-8px) rotate(5deg) scale(1.05);filter:drop-shadow(0 0 8px #FF8A4C)}}
 @keyframes windQ{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 @media (prefers-reduced-motion:reduce){.windH,.windQ{animation:none}}
+.windG{animation:windG .9s ease-in-out infinite}.windS{animation:windS .5s ease-in-out infinite}.windF{animation:windH 1.2s ease-in-out infinite,flick .35s steps(2) infinite}
+@keyframes windG{0%,100%{transform:translate(0,0) scale(1,1)}50%{transform:translate(-12px,10px) scale(1.1,.84);filter:drop-shadow(0 0 9px #3FB6FF)}}
+@keyframes windS{0%,100%{transform:scale(1);filter:drop-shadow(0 0 6px #FF2D2D)}50%{transform:translateY(-8px) scale(1.14);filter:drop-shadow(0 0 20px #FF2D2D) brightness(1.25)}}
+@keyframes flick{50%{opacity:.5}}
+@media (prefers-reduced-motion:reduce){.windG,.windS,.windF{animation:none}}
+.pw{height:6px;border-radius:3px;background:rgba(255,255,255,.18);margin-top:5px;overflow:hidden}.pw>div{height:100%;width:0;background:#FFD23F;transition:width .3s}.pw.full>div{box-shadow:0 0 8px #FFD23F;animation:pwf .5s ease-in-out infinite alternate}
+@keyframes pwf{to{filter:brightness(1.35)}}
+.btns button[hidden],.pw[hidden]{display:none!important}
+body.infight .arena .btns button.spc{grid-column:1/-1;min-height:48px!important;flex-direction:row!important;gap:10px!important;background:linear-gradient(90deg,#FFD23F,#FF8A4C)!important;color:#0F1B2D!important;animation:pwf .5s ease-in-out infinite alternate}
+body.infight .arena .btns button.spc span{color:#0F1B2D!important;font-size:15px!important;font-weight:800}
+body.infight .arena .btns button.spc span+span{font-size:11px!important;font-weight:600}
+body.infight.spready .arena .spr{bottom:132px}
+#iqchip.warn{background:rgba(214,40,40,.95)}
+label.opp{font-weight:700;font-size:14px;margin-bottom:-4px}
+#oppsel{width:100%;min-height:48px;border-radius:14px;border:2px solid var(--muted);background:var(--card);color:var(--text);font:600 15px "Space Grotesk",system-ui,sans-serif;padding:0 12px}
+#oppnote:empty{display:none}#oppnote{font-size:13px}
+body.onfight #pre label.opp{text-align:left}
+
 .intent{background:var(--intent);border-radius:20px;padding:14px 20px}.tag{font-size:13px;font-weight:700;color:var(--warn)}
 #mvname{font-size:22px;font-weight:700;margin:2px 0}#mvdesc,#mvnext{font-size:14px;color:var(--muted)}
 .btns{display:flex;flex-direction:column;gap:10px}
@@ -233,15 +251,15 @@ body.infight main{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))!im
 <h2>Playground fight</h2>
 <section class="card" id="rank"><div class="row"><b id="rname"></b><span id="rp"></span></div><div class="bar"><div id="rbar" style="background:var(--lime)"></div></div><div class="sub" id="rnext"></div></section>
 <section class="arena" id="arena"><div class="sky"></div><div class="rail"></div><div class="sand"></div>
-<div class="banner"><div id="bn-idle"><b id="bn-title"></b><span class="s">Computer opponent</span></div>
-<div class="bhp" id="bn-hp" hidden><div><div class="name"><span id="pname"></span><small id="pspd"></small></div><div class="bar"><div id="pbar"></div></div><div class="hp" id="php"></div></div>
-<div><div class="name"><span id="ename"></span><small id="round"></small></div><div class="bar"><div id="ebar"></div></div><div class="hp" id="ehp"></div></div></div></div>
+<div class="banner"><div id="bn-idle"><b id="bn-title"></b><span class="s" id="bn-sub">Computer opponent</span></div>
+<div class="bhp" id="bn-hp" hidden><div><div class="name"><span id="pname"></span><small id="pspd"></small></div><div class="bar"><div id="pbar"></div></div><div class="pw"><div id="ppw"></div></div><div class="hp" id="php"></div></div>
+<div><div class="name"><span id="ename"></span><small id="round"></small></div><div class="bar"><div id="ebar"></div></div><div class="pw" id="opwr"><div id="opw"></div></div><div class="hp" id="ehp"></div></div></div></div>
 <div class="spr" id="osp"></div><div class="spr" id="psp"></div><div id="iqchip" hidden></div></section>
-<section class="card" id="pre"><h3>Ranked battle</h3><p class="sub" style="margin:0">Win: <span id="winrp">+25</span> RP and +15 coins. 3 free fight tickets every day. Bronze opponents go easy on you.</p><button class="go" id="fbtn">Fight (1 ticket)</button><p id="fnote" aria-live="polite"></p><details><summary>How fights work</summary><div class="cmp" id="cmp"></div><p class="note" style="margin:8px 0 0">Fast attack: a normal hit. Strong attack: hits much harder but always goes last. Block: take less damage (IQ makes it stronger). Dodge: avoids Heavy Swings completely, but not Quick Hooks. You can’t use the same move twice in a row. Speed decides who moves first, Strength hits harder, Stamina adds HP, Focus gives a chance of a big hit, and IQ Level 5 shows the opponent’s next moves.</p></details><p class="note" id="rec" style="margin:0"></p></section>
+<section class="card" id="pre"><h3>Ranked battle</h3><p class="sub" style="margin:0">Win: <span id="winrp">+25</span> RP and +15 coins. 3 free fight tickets every day. Bronze opponents go easy on you.</p><label class="opp" for="oppsel">Opponent</label><select id="oppsel"></select><p class="note" id="oppnote" style="margin:0"></p><button class="go" id="fbtn">Fight (1 ticket)</button><p id="fnote" aria-live="polite"></p><details><summary>How fights work</summary><div class="cmp" id="cmp"></div><p class="note" style="margin:8px 0 0">Fast attack: a normal hit, and it stops a Grab. Strong attack: hits much harder but always goes last. Block: take less damage (IQ makes it stronger), but a Grab goes straight through it. Dodge: avoids Heavy Swings and Grabs, but not Quick Hooks. You can’t use the same move twice in a row. Read the wind-up: orange glow = Heavy Swing, fast shake = Quick Hook, blue crouch = Grab (Silver+). From Gold, opponents throw fake-outs that look like a Heavy Swing: attack them, don’t dodge. IQ Level 3 spots fake-outs, IQ Level 5 shows the next moves. Landing hits fills 💥 Power: when it’s full, use your champ’s Special (Dash: Zoom Combo, Crank: Crank Slam, Jam: Beat Drop). From Silver, opponents get Specials too, and only Block stops them hurting. Higher ranks bring tougher, smarter opponents that learn your habits. Speed decides who moves first and helps you slip hits, Strength and IQ add damage, Stamina adds HP, Focus gives big crits.</p></details><p class="note" id="rec" style="margin:0"></p></section>
 <div id="battle" hidden>
 <section class="intent"><div class="tag" id="mvtag"></div><div id="mvname"></div><div id="mvdesc"></div><div id="mvnext"></div></section>
 <div class="pick">Pick your response</div>
-<div class="btns"><button class="pri" data-m="strike"><span id="sn">Fast attack</span><span id="sd"></span></button><button class="pri2" data-m="strong"><span>Strong attack</span><span></span></button><button data-m="guard"><span>Block</span><span id="gd"></span></button><button data-m="sidestep"><span>Dodge</span><span></span></button></div>
+<div class="btns"><button class="spc" data-m="special" hidden><span>Special</span><span></span></button><button class="pri" data-m="strike"><span id="sn">Fast attack</span><span id="sd"></span></button><button class="pri2" data-m="strong"><span>Strong attack</span><span></span></button><button data-m="guard"><span>Block</span><span id="gd"></span></button><button data-m="sidestep"><span>Dodge</span><span></span></button></div>
 <p id="flog" aria-live="polite"></p>
 </div>
 </div>
@@ -430,6 +448,67 @@ const R=[["Bronze",0],["Silver",250],["Gold",600],["Platinum",1200],["Diamond",2
 const WINRP=[25,20,15,12,10,8],LOSSRP=[0,10,15,20,25,30];
 const rk=rp=>{let i=0;while(i<R.length-1&&rp>=R[i+1][1])i++;return i;};
 const RREW=[null,{c:100,t:2},{c:200,t:3},{c:350,t:4},{c:600,t:5},{c:1000,t:10}];
+/* Fight engine (pure, no DOM) */
+const SPEC={dash:{n:"Zoom Combo",d:"3 lightning hits"},crank:{n:"Crank Slam",d:"one massive slam"},jam:{n:"Beat Drop",d:"big hit + heals you"}};
+const OMV={heavy:{n:"Heavy Swing",w:450},quick:{n:"Quick Hook",w:150},grab:{n:"Grab",w:380},feint:{n:"Fake-out",w:450},special:{n:"SPECIAL",w:600}};
+const RDIFF=[{dm:.7,hm:1,bonus:0,pool:["heavy","quick"],k:0,spec:0},{dm:1.1,hm:1.2,bonus:1,pool:["heavy","quick","grab"],k:.3,spec:1},{dm:1.3,hm:1.5,bonus:2,pool:["heavy","quick","grab","feint"],k:.6,spec:1},{dm:1.5,hm:1.8,bonus:3,pool:["heavy","quick","grab","feint"],k:1,spec:1},{dm:1.7,hm:2.1,bonus:4,pool:["heavy","quick","grab","feint"],k:1,spec:1},{dm:1.9,hm:2.5,bonus:6,pool:["heavy","quick","grab","feint"],k:1,spec:1}];
+function mkF(c,L,dm,hm){dm=dm||1;hm=hm||1;const s=L.strength,sp=L.speed;
+return{c,L,sp,iq:L.iq,max:Math.round((46+4*L.stamina)*hm),hp:Math.round((46+4*L.stamina)*hm),pw:0,dm,
+fast:Math.round(5.5+1.5*s+sp+.5*L.iq),strong:Math.round(8+3*s),
+heavy:Math.round((10+2*s)*dm),quick:Math.round((5+s+sp+.5*L.iq)*dm),grab:Math.round((8+1.5*s+.5*L.iq)*dm),
+crit:Math.min(50,5*L.focus),pct:Math.min(80,50+2*(L.iq-1))};}
+const evade=(d,a)=>Math.min(25,Math.max(0,7*(d.sp-a.sp)));
+const addPw=(f,n,on)=>{if(on)f.pw=Math.min(100,f.pw+n);};
+function aiPick(g,R){const base={heavy:1,quick:1,grab:.8,feint:.6},h=g.hist,tot=(h.strike+h.strong+h.guard+h.sidestep)||1,f=k=>h[k]/tot,k=g.k;
+const w=g.pool.map(m=>{let x=base[m];if(k){if(m==="quick")x*=1+2*k*f("sidestep");if(m==="feint")x*=1+2*k*(f("sidestep")+f("guard"));if(m==="grab")x*=1+3*k*f("guard");if(m==="heavy")x*=1+2*k*(f("strike")+f("strong"));}return x;});
+let r=R()*w.reduce((a,b)=>a+b,0);for(let i=0;i<w.length;i++){r-=w[i];if(r<=0)return g.pool[i];}return g.pool[0];}
+function newGame(pc,pL,oc,oL,d,R){R=R||Math.random;
+const g={p:mkF(pc,pL),o:mkF(oc,oL,d.dm,d.hm),pool:d.pool,k:d.k,ospec:!!d.spec,hist:{strike:0,strong:0,guard:0,sidestep:0},round:1,last:null};
+g.queue=[aiPick(g,R),aiPick(g,R)];nextMove(g,R);return g;}
+function nextMove(g,R){R=R||Math.random;if(g.ospec&&g.o.pw>=100){g.cur="special";return;}g.cur=g.queue.shift();g.queue.push(aiPick(g,R));}
+function specHits(a,b,R){const ev=[],dm=a.dm||1;
+if(a.c==="dash"){for(let i=0;i<3;i++)ev.push({t:"hit",by:a,on:b,d:Math.round(a.fast*.7*dm),txt:"Zoom!"});}
+else if(a.c==="crank")ev.push({t:"hit",by:a,on:b,d:Math.round(a.strong*1.4*dm),txt:"SLAM!"});
+else{ev.push({t:"hit",by:a,on:b,d:Math.round(a.fast*1.5*dm),txt:"Drop!"});ev.push({t:"heal",by:a,on:a,d:Math.round(a.max*.2)});}
+return ev;}
+/* returns a list of events; applies them to g */
+function resolve(g,choice,R){R=R||Math.random;const P=g.p,O=g.o,m=g.cur,ev=[],push=e=>{e.s=[P.hp,O.hp,P.pw,O.pw];ev.push(e);};
+if(choice!=="special")g.hist[choice]++;g.last=choice==="special"?g.last:choice;
+const apply=e=>{if(e.t==="hit"){e.on.hp=Math.max(0,e.on.hp-e.d);addPw(e.by,8,e.by===P||g.ospec);addPw(e.on,6,e.on===P||g.ospec);}else if(e.t==="heal"){e.on.hp=Math.min(e.on.max,e.on.hp+e.d);}push(e);};
+const dead=()=>P.hp<=0||O.hp<=0;
+if(choice==="special"){P.pw=0;for(const e of specHits(P,O,R)){if(dead())break;apply(e);}
+if(m==="special"){O.pw=0;}push({t:"stun",on:O});return ev;}
+if(m==="special"){O.pw=0;for(const e of specHits(O,P,R)){if(dead())break;if(e.t==="hit"&&choice==="guard"){e.d=Math.round(e.d*(1-P.pct/100));e.blk=1;}apply(e);}
+if(choice!=="guard")push({t:"cancel",on:P});return ev;}
+let grabStopped=false;
+const pAct=()=>{if(choice!=="strike"&&choice!=="strong")return;const strong=choice==="strong";
+if(R()*100<evade(O,P)){push({t:"evade",by:O,on:P,mv:strong?"Strong attack":"Fast attack"});return;}
+const base=strong?P.strong:P.fast,crit=R()*100<P.crit;apply({t:"hit",by:P,on:O,d:crit?Math.round(base*1.5):base,crit,mv:strong?"Strong attack":"Fast attack"});
+if(m==="grab"&&!strong){grabStopped=true;addPw(P,15,1);push({t:"note",txt:"Fast attack stops the Grab!"});}
+if(m==="feint"){addPw(P,15,1);push({t:"note",txt:"Saw through the fake-out!"});}};
+const oAct=()=>{const nm=OMV[m].n;
+if(m==="feint"){if(choice==="guard"||choice==="sidestep")apply({t:"hit",by:O,on:P,d:O.quick,mv:"Fake-out",txt:"Fooled!"});else push({t:"note",txt:"It was a fake-out!"});return;}
+if(m==="grab"){if(grabStopped||choice==="strike")return;if(choice==="sidestep"){addPw(P,10,1);push({t:"dodge",on:P,mv:nm});return;}
+apply({t:"hit",by:O,on:P,d:O.grab,mv:nm,thru:choice==="guard"});return;}
+if(m==="heavy"&&choice==="sidestep"){addPw(P,15,1);push({t:"dodge",on:P,mv:nm});return;}
+if(choice!=="guard"&&R()*100<evade(P,O)){push({t:"evade",by:P,on:O,mv:nm});return;}
+const d=choice==="guard"?Math.round(O[m]*(1-P.pct/100)):O[m];apply({t:"hit",by:O,on:P,d,mv:nm,blk:choice==="guard",caught:choice==="sidestep"});};
+const pFirst=choice!=="strong"&&P.sp>O.sp;
+push({t:"order",pFirst});
+for(const s of pFirst?[pAct,oAct]:[oAct,pAct]){if(dead())break;s();}
+/* fast attack always beats a grab, even when slower */
+return ev;}
+var oppId="cpu";
+function ghostL(x){const a=x&&x.stats&&x.stats[x.champ];if(!Array.isArray(a)||a.length!==5)return null;return Object.fromEntries(S.map((s,i)=>[s.k,Math.max(1,Math.min(MAX,Number(a[i])|0))]));}
+function myStats(){return Object.fromEntries(["dash","crank","jam"].map(c=>[c,S.map(s=>lv(c,s.k))]));}
+function ghosts(){return others.filter(x=>x.L).sort((a,b)=>Math.abs(a.rp-st.rp)-Math.abs(b.rp-st.rp)).slice(0,12);}
+function curOpp(){if(oppId!=="cpu"){const x=others.find(y=>y.id===oppId&&y.L);if(x)return{ghost:1,name:x.name,c:x.champ,L:x.L,rp:x.rp};}
+const o=CH[who].o,b=RDIFF[rk(st.rp)].bonus;return{c:o,L:Object.fromEntries(S.map(s=>[s.k,Math.min(MAX,lv(o,s.k)+b)]))};}
+function fillOpp(){const s=$("oppsel");if(!s)return;const gs=ghosts();if(oppId!=="cpu"&&!gs.some(x=>x.id===oppId))oppId="cpu";
+s.innerHTML="";const o0=document.createElement("option");o0.value="cpu";o0.textContent="🤖 Computer "+CH[CH[who].o].n+" · "+R[rk(st.rp)][0]+" difficulty";s.append(o0);
+gs.forEach(x=>{const o=document.createElement("option");o.value=x.id;o.textContent="👻 "+x.name+"'s "+CH[x.champ].n+" · "+R[rk(x.rp)][0];s.append(o);});s.value=oppId;
+$("oppnote").textContent=gs.length?"👻 Ghost fight: take on another player's champ with their real stats.":"Other players show up here as 👻 ghosts once they’ve opened the updated app.";}
+
 const rewTxt=r=>r.c+" coins + "+r.t+" fight tickets";
 function claimRanks(b){if(typeof st.rkBest!=="number")st.rkBest=b;const now=rk(st.rp);let out=[];while(st.rkBest<now){st.rkBest++;const r=RREW[st.rkBest];if(r){st.coins+=r.c;st.tickets+=r.t;out.push(R[st.rkBest][0]+" reward: "+rewTxt(r)+"!");}}return out.join(" ");}
 const RIV=[["Crank",2400],["Crash",1300],["Peep",700],["Scoot",300],["Skip",60]];
@@ -517,13 +596,13 @@ const e=st.energy;$("enbar").style.width=e+"%";$("enval").textContent=e+" / 100"
 }
 function renderRank(){const i=rk(st.rp),n=R[i+1];try{$("winrp").textContent="+"+WINRP[i];}catch(e){}$("rname").textContent=R[i][0];$("rp").textContent=st.rp+" RP";$("rbar").style.width=(n?(st.rp-R[i][1])/(n[1]-R[i][1])*100:100)+"%";$("rnext").textContent=n?(n[1]-st.rp)+" RP to "+n[0]+((typeof st.rkBest!=="number"||st.rkBest<i+1)&&RREW[i+1]?" · reward: "+rewTxt(RREW[i+1]):""):"Top rank";}
 function renderPre(){
-const o=CH[who].o,L=c=>S.map(s=>s.n+" "+lv(c,s.k)).join(", ");
-$("bn-title").textContent=CH[who].n+" vs "+CH[o].n;renderRank();
+fillOpp();const op=curOpp(),o=op.c,L=c=>S.map(s=>s.n+" "+(c===who?lv(c,s.k):op.L[s.k])).join(", ");
+$("bn-title").textContent=CH[who].n+" vs "+(op.ghost?op.name+"'s "+CH[o].n:CH[o].n);$("bn-sub").textContent=op.ghost?"👻 Ghost of a real player":"Computer opponent";renderRank();
 $("osp").className="spr";$("osp").innerHTML=spr(o);$("osp").style.width=CH[o].w+"px";
 $("psp").innerHTML=spr(who)+'<div class="shield" id="shield"></div>';$("psp").style.width=CH[who].w+"px";
 $("cmp").innerHTML="";
-[[who,"You"],[o,"Opponent"]].forEach(([c,t])=>{const d=document.createElement("div");d.textContent=t+" ("+CH[c].n+"): "+L(c);$("cmp").append(d);});
-const first=lv(who,"speed")>lv(o,"speed");
+[[who,"You"],[o,"Opponent"]].forEach(([c,t],i)=>{const d=document.createElement("div");d.textContent=t+" ("+CH[c].n+"): "+(i?S.map(s=>s.n+" "+op.L[s.k]).join(", "):L(who));$("cmp").append(d);});
+const first=lv(who,"speed")>op.L.speed;
 const d=document.createElement("div");d.className="sub";d.textContent=first?CH[who].n+" moves first.":CH[o].n+" moves first. Train Speed to change that.";$("cmp").append(d);
 $("fbtn").disabled=st.tickets<1;$("fnote").textContent=st.tickets<1?"Out of tickets. You get 3 free ones tomorrow, or train for 30 minutes to earn one now.":"";
 $("rec").textContent="Record: "+st.wins+" wins, "+st.losses+" losses";renderTop();
@@ -755,73 +834,86 @@ if(i.L>before)$("v-"+act).animate([{transform:"scale(1)"},{transform:"scale(1.4)
 };
 
 /* Fight */
-const rnd=()=>Math.random()<.5?"heavy":"quick";
 const btns=[...document.querySelectorAll(".btns button")];
-function openBtns(){btns.forEach(b=>{const sub=b.querySelectorAll("span")[1];if(!b.dataset.sub)b.dataset.sub=sub.textContent;const used=g&&g.last===b.dataset.m;b.disabled=used;sub.textContent=used?"Just used":b.dataset.sub;});}
+const WINDS=["windH","windQ","windG","windS","windF"];
+function openBtns(){btns.forEach(b=>{const sp=b.querySelectorAll("span");
+if(b.dataset.m==="special"){const on=!!(g&&g.active&&g.p.pw>=100);b.hidden=!on;b.disabled=false;document.body.classList.toggle("spready",on);if(on){sp[0].textContent="💥 "+SPEC[g.me].n;sp[1].textContent=SPEC[g.me].d;}return;}
+if(b.dataset.sub===undefined)b.dataset.sub=sp[1].textContent;const used=g&&g.last===b.dataset.m;b.disabled=used;sp[1].textContent=used?"Just used":b.dataset.sub;});}
 function setLock(on){$("who").querySelectorAll("button").forEach(b=>b.disabled=on);}
+$("oppsel").onchange=e=>{oppId=e.target.value;renderPre();};
 $("fbtn").onclick=()=>{
 if(st.tickets<1)return;st.tickets--;save();
-const o=CH[who].o,P=k=>lv(who,k),O=k=>lv(o,k);
-const mp=46+4*P("stamina"),mo=46+4*O("stamina");
-g={me:who,o,ph:mp,eh:mo,mp,mo,round:1,busy:false,active:true,queue:[rnd(),rnd()],iq:P("iq"),
-sp:P("speed"),os:O("speed"),strike:8+2*P("strength"),pct:Math.min(80,50+2*(P("iq")-1)),crit:Math.min(50,5*P("focus")),
-mv:{heavy:{n:"Heavy Swing",dmg:Math.round((6+2*O("strength"))*(rk(st.rp)===0?.8:1)),w:450,d:"Slow wind-up, "},quick:{n:"Quick Hook",dmg:Math.round((5+O("strength"))*(rk(st.rp)===0?.8:1)),w:150,d:"Fast jab, "}}};
-g.first=g.sp>g.os;setLock(true);
+const op=curOpp(),d=op.ghost?Object.assign({},RDIFF[Math.max(1,rk(op.rp))],{dm:1,hm:1}):RDIFF[rk(st.rp)];
+const pL=Object.fromEntries(S.map(s=>[s.k,lv(who,s.k)]));
+g=newGame(who,pL,op.c,op.L,d);Object.assign(g,{me:who,oc:op.c,ghost:op.ghost?op.name:null,active:true,busy:false});
+setLock(true);
 $("pre").hidden=true;$("rank").hidden=true;$("bn-idle").hidden=true;$("bn-hp").hidden=false;$("battle").hidden=false;$("end").hidden=true;
-$("ename").textContent=CH[o].n;$("pname").textContent=CH[who].n;$("pspd").textContent="Speed "+g.sp;
-$("mvtag").textContent=CH[o].n+"’s next move";
-$("flog").textContent="Watch "+CH[o].n+" wind up: a slow glowing wind-up is a Heavy Swing, a fast shake is a Quick Hook.";
-g.last=null;telegraph();renderF();openBtns();renderTop();
+$("ename").textContent=g.ghost?g.ghost.slice(0,10)+"'s "+CH[op.c].n:CH[op.c].n;$("pname").textContent=CH[who].n;$("pspd").textContent="Speed "+g.p.sp;
+$("opwr").hidden=!g.ospec;$("mvtag").textContent=CH[op.c].n+"’s next move";
+$("flog").textContent="Read the wind-up: orange glow = Heavy Swing (Dodge it), fast shake = Quick Hook (hit back)"+(d.pool.includes("grab")?", blue crouch = Grab (Fast attack stops it)":"")+". Land hits to fill 💥 Power for your Special.";
+showMove();renderF();openBtns();renderTop();
 };
-function renderF(){$("ebar").style.width=g.eh/g.mo*100+"%";$("pbar").style.width=g.ph/g.mp*100+"%";$("ehp").textContent="HP "+g.eh+" / "+g.mo;$("php").textContent="HP "+g.ph+" / "+g.mp;$("round").textContent="Round "+g.round;}
-function telegraph(){
-g.cur=g.queue.shift();g.queue.push(rnd());const m=g.mv[g.cur];
-$("mvname").textContent=m.n;$("mvdesc").textContent="Watch the wind-up…";
-$("mvnext").textContent=g.iq>=5?"Move after that: "+g.mv[g.queue[0]].n:"Reach IQ Level 5 to see the move after this one.";{const ch=$("iqchip");ch.hidden=!(g.iq>=5);if(g.iq>=5)ch.textContent="🧠 Next: "+m.n+" · then "+g.mv[g.queue[0]].n;}
-$("osp").classList.remove("windH","windQ");$("osp").classList.add(g.cur==="heavy"?"windH":"windQ");
+function renderF(s){s=s||[g.p.hp,g.o.hp,g.p.pw,g.o.pw];
+$("pbar").style.width=s[0]/g.p.max*100+"%";$("ebar").style.width=s[1]/g.o.max*100+"%";
+$("php").textContent="HP "+s[0]+" / "+g.p.max;$("ehp").textContent="HP "+s[1]+" / "+g.o.max;$("round").textContent="Round "+g.round;
+$("ppw").style.width=s[2]+"%";$("ppw").parentNode.classList.toggle("full",s[2]>=100);$("opw").style.width=s[3]+"%";$("opw").parentNode.classList.toggle("full",s[3]>=100);}
+function showMove(){
+const cur=g.cur,iq=g.p.iq,seeFake=iq>=3,nx=g.queue[0],nm=k=>k==="feint"&&!seeFake?OMV.heavy.n:OMV[k].n;
+$("mvname").textContent=nm(cur);$("mvdesc").textContent="Watch the wind-up…";
+$("mvnext").textContent=iq>=5?"Move after that: "+nm(nx):"Reach IQ Level 5 to see the move after this one.";
+const ch=$("iqchip");ch.classList.toggle("warn",cur==="special");
+if(cur==="special"){ch.hidden=false;ch.textContent="⚠️ "+SPEC[g.oc].n+" incoming! Block it";}
+else if(iq>=5){ch.hidden=false;ch.textContent="🧠 Next: "+nm(cur)+" · then "+nm(nx);}
+else if(cur==="feint"&&seeFake){ch.hidden=false;ch.textContent="👀 That’s a fake-out. Attack!";}
+else ch.hidden=true;
+const o=$("osp");o.classList.remove(...WINDS);
+o.classList.add({heavy:"windH",quick:"windQ",grab:"windG",special:"windS",feint:seeFake?"windF":"windH"}[cur]);
 }
-function pop(el,text,color){const p=document.createElement("b");p.className="pop";p.textContent=text;p.style.color=text[0]==="-"?"#B3261E":"#0F1B2D";p.style.textShadow="0 0 4px #FFF,0 0 4px #FFF";p.style.left=el.offsetLeft+el.offsetWidth/2-20+"px";p.style.top=el.offsetTop+"px";$("arena").appendChild(p);p.animate([{transform:"translateY(0)",opacity:1},{transform:"translateY(-44px)",opacity:0}],{duration:900*T}).finished.then(()=>p.remove());}
+function pop(el,text,color){const p=document.createElement("b");p.className="pop";p.textContent=text;p.style.color=color||(text[0]==="-"?"#B3261E":text[0]==="+"?"#1B7F3B":"#0F1B2D");p.style.textShadow="0 0 4px #FFF,0 0 4px #FFF";p.style.left=el.offsetLeft+el.offsetWidth/2-20+"px";p.style.top=el.offsetTop+"px";$("arena").appendChild(p);p.animate([{transform:"translateY(0)",opacity:1},{transform:"translateY(-44px)",opacity:0}],{duration:900*T}).finished.then(()=>p.remove());}
 function flash(el){try{if(el&&el.id==="psp"&&document.body.classList.contains("infight")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)$("arena").animate([{transform:"translate(0,0)"},{transform:"translate(-5px,2px)"},{transform:"translate(5px,-2px)"},{transform:"translate(-3px,1px)"},{transform:"translate(0,0)"}],{duration:260});}catch(e){}el.animate([{filter:"brightness(1)",transform:"translateX(0)"},{filter:"brightness(2)",transform:"translateX(-6px)"},{filter:"brightness(1)",transform:"translateX(6px)"},{filter:"brightness(1)",transform:"translateX(0)"}],{duration:260*T});}
 function seq(el,pull,x,y,s0){const lunge=140,hold=120,back=300,tot=pull+lunge+hold+back,p=`translate(${-x*.18}px,${-y*.16}px) scale(${s0})`,l=`translate(${x}px,${y}px) scale(1.1)`,z="translate(0,0) scale(1)";
 return el.animate([{transform:z,offset:0},{transform:p,offset:pull/tot},{transform:l,offset:(pull+lunge)/tot},{transform:l,offset:(pull+lunge+hold)/tot},{transform:z,offset:1}],{duration:tot*T,easing:"ease-in-out"});}
+function hop(el,dx,dy){return el.animate([{transform:"translate(0,0)"},{transform:`translate(${dx}px,${dy}px)`},{transform:"translate(0,0)"}],{duration:420*T,easing:"ease-in-out"});}
 async function play(choice){
-if(!g||g.busy||!g.active)return;g.busy=true;g.last=choice;btns.forEach(b=>b.disabled=true);
-$("osp").classList.remove("windH","windQ");
-const m=g.mv[g.cur],L=[],me=CH[g.me].n,op=CH[g.o].n;
-if(choice==="strong")L.push("Strong attacks are slow, so "+op+" goes first.");else L.push(g.first?me+" is faster, so moves first.":op+" is faster, so moves first.");
-const pAct=async()=>{
-if(choice!=="strike"&&choice!=="strong")return;const strong=choice==="strong";
-const a=seq($("psp"),120,100,0,1.04);await sleep(260);
-const base=strong?Math.round(g.strike*1.6):g.strike,crit=Math.random()*100<g.crit,d=crit?Math.round(base*1.5):base;
-g.eh=Math.max(0,g.eh-d);pop($("osp"),"-"+d,"var(--hit)");flash($("osp"));renderF();L.push(me+(strong?" Strong attack":" Fast attack")+" hits for "+d+(crit?" (Focus crit!)":"")+".");await a.finished;
-};
-const oAct=async()=>{
-const dodge=choice==="sidestep"&&g.cur==="heavy";
-if(choice==="guard")$("shield").classList.add("on");
-const a=seq($("osp"),m.w,-100,0,1.08);
-if(dodge)$("psp").animate([{transform:"translate(0,0)"},{transform:"translate(-8px,-46px)"},{transform:"translate(0,0)"}],{duration:420*T,delay:(m.w-60)*T,easing:"ease-in-out"});
-await sleep(m.w+140);
-if(dodge){pop($("psp"),"Dodged!","var(--text)");L.push(me+" dodges "+m.n+".");}
-else{const d=choice==="guard"?Math.round(m.dmg*(1-g.pct/100)):m.dmg;g.ph=Math.max(0,g.ph-d);
-pop($("psp"),"-"+d,"var(--hit)");flash($("psp"));renderF();
-L.push(choice==="guard"?me+" blocks and takes "+d+".":choice==="sidestep"?"Quick Hook catches the dodge for "+d+".":m.n+" hits for "+d+".");}
-await a.finished;$("shield").classList.remove("on");
-};
-for(const step of (g.first&&choice!=="strong")?[pAct,oAct]:[oAct,pAct]){await step();if(g.eh<=0||g.ph<=0)break;}
+if(!g||g.busy||!g.active)return;if(choice!=="special"&&choice===g.last)return;
+if(choice==="special"&&g.p.pw<100)return;
+g.busy=true;btns.forEach(b=>b.disabled=true);
+$("osp").classList.remove(...WINDS);$("iqchip").hidden=true;
+const m=g.cur,ev=resolve(g,choice),L=[],me=CH[g.me].n,op=g.ghost?g.ghost+"'s "+CH[g.oc].n:CH[g.oc].n,P=g.p,psp=$("psp"),osp=$("osp");
+const mine=f=>f===P;
+if(choice==="special")L.push(me+" unleashes "+SPEC[g.me].n+"!");
+else if(m==="special")L.push(op+" unleashes "+SPEC[g.oc].n+"!");
+for(const e of ev){
+if(e.t==="order"){L.push(choice==="strong"?"Strong attacks are slow, so "+op+" goes first.":e.pFirst?me+" is faster, so moves first.":op+" moves first.");continue;}
+if(e.t==="note"){L.push(e.txt);continue;}
+if(e.t==="hit"){const att=mine(e.by)?psp:osp,def=mine(e.by)?osp:psp,dir=mine(e.by)?100:-100,spec=!e.mv;
+if(!mine(e.by)&&e.blk)$("shield").classList.add("on");
+const pull=spec?(e.txt==="Zoom!"?60:300):mine(e.by)?(e.mv==="Strong attack"?260:120):(OMV[m]?OMV[m].w:300);
+const a=seq(att,pull,dir,0,spec?1.12:1.04);await sleep(pull+140);
+pop(def,"-"+e.d);if(e.txt)pop(att,e.txt,"#FF8A1F");flash(def);renderF(e.s);
+L.push(spec?(e.blk?me+" blocks the Special and takes "+e.d+".":(mine(e.by)?me:op)+" hits for "+e.d+"."):mine(e.by)?me+" "+e.mv+" hits for "+e.d+(e.crit?" (Focus crit!)":"")+".":e.thru?"Grab goes straight through the block for "+e.d+".":e.blk?me+" blocks and takes "+e.d+".":e.caught?e.mv+" catches the dodge for "+e.d+".":e.txt==="Fooled!"?"Fake-out! "+op+" catches "+me+" off guard for "+e.d+".":e.mv+" hits for "+e.d+".");
+await a.finished;$("shield").classList.remove("on");continue;}
+if(e.t==="dodge"){const a=seq(osp,OMV[m].w,-100,0,1.08);hop(psp,-8,-46);await sleep(OMV[m].w+140);pop(psp,m==="grab"?"Escaped!":"Dodged!");renderF(e.s);L.push(me+(m==="grab"?" slips out of the Grab.":" dodges the "+e.mv+"."));await a.finished;continue;}
+if(e.t==="evade"){const att=mine(e.by)?osp:psp,def=mine(e.by)?psp:osp,dir=mine(e.by)?-100:100;const a=seq(att,mine(e.by)?OMV[m].w:120,dir,0,1.04);hop(def,mine(e.by)?-22:22,-10);await sleep(260);pop(def,"Too fast!");L.push((mine(e.by)?me:op)+" is too quick and slips the "+e.mv+".");await a.finished;continue;}
+if(e.t==="heal"){pop(mine(e.on)?psp:osp,"+"+e.d);renderF(e.s);L.push((mine(e.on)?me:op)+" heals "+e.d+".");await sleep(300);continue;}
+if(e.t==="stun"){pop(osp,"Stunned!","#6B4FD6");L.push(op+" is knocked off balance and can’t hit back.");await sleep(350);continue;}
+if(e.t==="cancel"){pop(psp,"Knocked back!","#6B4FD6");L.push(me+" gets knocked back. Block a Special next time!");await sleep(350);continue;}
+}
+renderF();
 $("flog").textContent=L.join(" ");
-if(g.eh<=0||g.ph<=0){finish(g.eh<=0);return;}
-g.round++;telegraph();renderF();openBtns();g.busy=false;
+if(g.o.hp<=0||g.p.hp<=0){finish(g.o.hp<=0&&g.p.hp>0);return;}
+g.round++;nextMove(g);showMove();renderF();openBtns();g.busy=false;
 }
 function finish(win){
-g.active=false;setLock(false);const before=rk(st.rp);
+g.active=false;setLock(false);document.body.classList.remove("spready");$("iqchip").hidden=true;const before=rk(st.rp);
 const safe=rk(st.rp)===0,wg=WINRP[before],ls=LOSSRP[before];if(win){st.wins++;st.rp+=wg;st.coins+=15;}else{st.losses++;st.coins+=5;if(!safe)st.rp=Math.max(0,st.rp-ls);}
 const after=rk(st.rp);const rew=claimRanks(before);save();
-$("endt").textContent=win?CH[g.me].n+" wins!":CH[g.o].n+" wins this round";
-let t=(win?"+"+wg+" RP and +15 coins. ":(safe?"No RP lost in Bronze, and +5 coins for trying. ":"−"+ls+" RP, +5 coins for trying. "))+(win?"Train to earn tickets for the next fight.":"Tip: Dodge the slow glowing Heavy Swings, and hit back when you see the fast shake of a Quick Hook.");
+const on=g.ghost?g.ghost+"'s "+CH[g.oc].n:CH[g.oc].n;
+$("endt").textContent=win?CH[g.me].n+" wins!":on+" wins this round";
+let t=(win?(g.ghost?"You beat "+on+". ":"")+"+"+wg+" RP and +15 coins. ":(safe?"No RP lost in Bronze, and +5 coins for trying. ":"−"+ls+" RP, +5 coins for trying. "))+(win?"":"Tip: Dodge the orange-glow Heavy Swing, Fast attack the blue-crouch Grab, and Block when a Special is coming.");
 if(after>before)t+=" Rank up: "+R[after][0]+"!";if(rew)t+=" 🎁 "+rew;
 $("endp").textContent=t;$("end").hidden=false;{const ab=$("againbtn");ab.hidden=st.tickets<1;ab.textContent="Fight again ("+st.tickets+(st.tickets===1?" ticket left)":" tickets left)");}($("againbtn").hidden?$("endbtn"):$("againbtn")).focus();
 }
-$("endbtn").onclick=()=>{$("end").hidden=true;$("battle").hidden=true;$("pre").hidden=false;$("rank").hidden=false;$("bn-idle").hidden=false;$("bn-hp").hidden=true;renderPre();renderLB();};
 btns.forEach(b=>b.onclick=()=>play(b.dataset.m));$("againbtn").onclick=()=>{$("endbtn").click();if(st.tickets>0)$("fbtn").click();};try{$("arena").appendChild(document.querySelector(".btns"));}catch(e){}
 
 (function(){const fp=$("fight");const sync=()=>{document.body.classList.toggle("onfight",!fp.hidden);};
@@ -835,15 +927,15 @@ function cnote(t){try{$("cnote").textContent=t;}catch(e){}}
 function pushCloud(){if(!sb||!myId)return;clearTimeout(pushT);pushT=setTimeout(doPush,1200);}
 async function doPush(){if(!sb||!myId)return;if(pushing){pushAgain=true;return;}pushing=true;
 try{const sv=JSON.stringify(st);if(sv!==lastSave){const r=await sb.from("saves").upsert({id:myId,data:st,updated:new Date(st._t||Date.now()).toISOString()});if(!r.error)lastSave=sv;}
-if(prof&&!prof.offline){const p={id:myId,name:prof.name,champ:prof.champ||"dash",rp:Math.max(0,st.rp|0),wins:st.wins|0,losses:st.losses|0,wk:wkKey(),wk_min:myWeekMin(),updated:new Date().toISOString()};const pj=JSON.stringify([p.name,p.champ,p.rp,p.wins,p.losses,p.wk,p.wk_min]);
-if(pj!==lastPlayer){let r=await sb.from("players").upsert(p);if(r.error&&/wk/.test(String(r.error.message||""))){delete p.wk;delete p.wk_min;r=await sb.from("players").upsert(p);}if(!r.error)lastPlayer=pj;}}}
+if(prof&&!prof.offline){const p={id:myId,name:prof.name,champ:prof.champ||"dash",rp:Math.max(0,st.rp|0),wins:st.wins|0,losses:st.losses|0,wk:wkKey(),wk_min:myWeekMin(),stats:myStats(),updated:new Date().toISOString()};const pj=JSON.stringify([p.name,p.champ,p.rp,p.wins,p.losses,p.wk,p.wk_min,p.stats]);
+if(pj!==lastPlayer){let r=await sb.from("players").upsert(p);if(r.error&&/stats/.test(String(r.error.message||""))){delete p.stats;r=await sb.from("players").upsert(p);}if(r.error&&/wk/.test(String(r.error.message||""))){delete p.wk;delete p.wk_min;r=await sb.from("players").upsert(p);}if(!r.error)lastPlayer=pj;}}}
 catch(e){}
 pushing=false;if(pushAgain){pushAgain=false;doPush();}}
 function okSave(r){return r&&typeof r.tickets==="number"&&typeof r.rp==="number"&&r.dash&&r.crank&&r.jam&&S.every(s=>typeof r.dash.xp[s.k]==="number"&&typeof r.crank.xp[s.k]==="number"&&r.dash.today&&r.crank.today);}
 const within=(p,ms)=>Promise.race([p,new Promise((_,j)=>setTimeout(()=>j({code:"timeout"}),ms))]);
 let lbBusy=false;
-async function loadLB(){if(!sb||lbBusy)return;lbBusy=true;try{const r=await within(sb.from("players").select("id,name,champ,rp").order("rp",{ascending:false}).limit(50),10000);
-if(r&&r.data){others=r.data.filter(x=>x.id!==myId).map(x=>({name:String(x.name||"Player").slice(0,16),champ:String(x.champ||"dash"),rp:Math.max(0,Number(x.rp)||0)}));renderLB();}}catch(e){}lbBusy=false;}
+async function loadLB(){if(!sb||lbBusy)return;lbBusy=true;try{let r=await within(sb.from("players").select("id,name,champ,rp,stats").order("rp",{ascending:false}).limit(50),10000);if(r&&r.error)r=await within(sb.from("players").select("id,name,champ,rp").order("rp",{ascending:false}).limit(50),10000);
+if(r&&r.data){others=r.data.filter(x=>x.id!==myId).map(x=>{const c=CH[x.champ]?String(x.champ):"dash";return{id:x.id,name:String(x.name||"Player").slice(0,16),champ:c,rp:Math.max(0,Number(x.rp)||0),L:ghostL({stats:x.stats,champ:c})};});renderLB();if(!g||!g.active)renderPre();}}catch(e){}lbBusy=false;}
 async function finishLogin(user,isNew){
 try{famReset();}catch(e){}myId=user.id;const md=user.user_metadata||{};
 const [pr,sr]=await Promise.all([sb.from("players").select("name,champ").eq("id",myId).maybeSingle(),sb.from("saves").select("data,updated").eq("id",myId).maybeSingle()]);
