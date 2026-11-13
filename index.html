@@ -228,6 +228,53 @@ body.infight main{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))!im
 .fcode{font:700 34px "Space Grotesk",system-ui,sans-serif;letter-spacing:.18em;text-align:center;background:var(--track);border-radius:16px;padding:14px 8px;user-select:all;-webkit-user-select:all}
 .end button.endsec{background:transparent;color:var(--muted);border:2px solid var(--track)}
 .end button{height:52px;border:0;border-radius:26px;background:var(--lime);color:#0F1B2D;font:700 17px "Space Grotesk",system-ui,sans-serif;cursor:pointer}
+
+
+.trsw{background:var(--card);padding:5px;border-radius:18px;gap:4px}
+.trsw button{border:0;min-height:42px;border-radius:14px;font-size:15px}
+.trsw button[aria-pressed="false"]{color:var(--muted)}
+#tp-log,#tp-book,#tp-stats{display:flex;flex-direction:column;gap:14px}
+#tp-log[hidden],#tp-book[hidden],#tp-stats[hidden]{display:none}
+.card .row h2{margin:0}
+.lnk{background:none;border:0;padding:4px 0;font:700 14px "Space Grotesk",system-ui,sans-serif;color:var(--blue);cursor:pointer}
+.tdgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tdc{background:var(--bg);border-radius:14px;padding:10px 6px;text-align:center;display:flex;flex-direction:column;gap:4px;align-items:center}
+.tdc .ic{font-size:20px;line-height:1}
+.tdc b{font:700 16px "Space Grotesk",system-ui,sans-serif}
+.tdc small{font-size:11.5px;color:var(--muted)}
+.tdc .mb{width:100%;height:5px;border-radius:3px;background:var(--track);overflow:hidden}
+.tdc .mb i{display:block;height:100%}
+.tdsl{font-size:13.5px;color:var(--muted);margin:2px 0 0}
+.wkr{font-size:13px;color:var(--muted);font-weight:500}
+.wk3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.wk3>div{background:var(--bg);border-radius:14px;padding:10px 6px;text-align:center;display:flex;flex-direction:column}
+.wk3 b{font:700 22px "Space Grotesk",system-ui,sans-serif}
+.wk3 small{font-size:12px;color:var(--muted)}
+.wkbars{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;height:118px}
+.wkb{display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end}
+.wkb .col2{width:100%;max-width:30px;flex:1;display:flex;flex-direction:column-reverse;border-radius:8px;background:var(--bg);overflow:hidden}
+.wkb .col2 i{display:block;width:100%}
+.wkb span{font-size:12px;color:var(--muted);font-weight:600}
+.wkb em{font-style:normal;font-size:11px;color:var(--muted);min-height:13px}
+.wkb.now span{color:var(--text);font-weight:800}
+.bkf{overflow-x:auto;gap:6px;padding-bottom:2px;scrollbar-width:none}
+.bkf::-webkit-scrollbar{display:none}
+.bkf button{flex:none;min-height:36px;padding:0 14px;border-radius:18px;font-size:14px;border-width:1.5px}
+.bkday{background:var(--card);border-radius:20px;padding:6px 16px 8px}
+.bkh{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0 6px;border-bottom:1.5px solid var(--bg)}
+.bkh b{font:700 15px "Space Grotesk",system-ui,sans-serif}
+.bkh span{font-size:13px;color:var(--muted)}
+.bke{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--bg)}
+.bke:last-child{border-bottom:0}
+.bke .ic{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:20px}
+.bke .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.bke .tx b{font-size:15px}
+.bke .tx small{font-size:12.5px;color:var(--muted)}
+.bke .gn{text-align:right;display:flex;flex-direction:column;gap:2px;flex:none}
+.bke .gn b{font-size:14px}
+.bke .gn small{font-size:12px;color:var(--muted)}
+.bkempty{text-align:center;padding:20px 10px}
+.stat .fx{font-size:12.5px;color:var(--text);background:var(--bg);border-radius:10px;padding:6px 10px;margin-top:2px}
 </style>
 </head>
 <body>
@@ -236,14 +283,17 @@ body.infight main{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))!im
 <div class="opts" id="who"><button data-w="dash" aria-pressed="true">Dash</button><button data-w="crank" aria-pressed="false">Crank</button><button data-w="jam" aria-pressed="false">Jam</button></div>
 
 <div id="train">
-<section class="card logc"><div class="lhead"><div id="hsp"></div><div class="lt"><h3 id="hname"></h3><p class="hdesc" id="hdesc"></p><button class="evb" id="evhint" type="button">See evolutions</button><div class="enl"><span>Energy</span><b id="enval"></b></div><div class="bar"><div id="enbar" style="background:var(--lime)"></div></div><div class="sub" id="entxt"></div></div></div>
-<h2>What did you do?</h2>
+<section class="card logc trhero"><div class="lhead"><div id="hsp"></div><div class="lt"><h3 id="hname"></h3><p class="hdesc" id="hdesc"></p><button class="evb" id="evhint" type="button">See evolutions</button><div class="enl"><span>Energy</span><b id="enval"></b></div><div class="bar"><div id="enbar" style="background:var(--lime)"></div></div><div class="sub" id="entxt"></div></div></div></section>
+<div class="opts trsw" id="trsw" role="tablist"><button data-p="log" aria-pressed="true">Log</button><button data-p="book" aria-pressed="false">Log book</button><button data-p="stats" aria-pressed="false">Stats</button></div>
+<div id="tp-log"><section class="card logc"><h2>What did you do?</h2>
 <div class="opts act" id="acts"><button data-a="speed" aria-pressed="true">Run<small>Speed</small></button><button data-a="strength" aria-pressed="false">Lift<small>Strength</small></button><button data-a="iq" aria-pressed="false">Read<small>IQ</small></button><button data-a="stamina" aria-pressed="false">Cycle<small>Stamina</small></button><button data-a="sleep" aria-pressed="false">Sleep<small>Recover</small></button></div>
 <div class="col" id="mwrap"><h2>For how long?</h2><div class="opts" id="mins"><button data-m="10" aria-pressed="false">10</button><button data-m="20" aria-pressed="true">20</button><button data-m="30" aria-pressed="false">30</button><button data-m="45" aria-pressed="false">45</button><button data-m="60" aria-pressed="false">60</button></div><label class="mother" for="minin">Other amount<input id="minin" type="number" inputmode="numeric" min="1" max="240" value="" placeholder="e.g. 25">minutes</label></div>
 <div class="col" id="hwrap"><div class="opts" id="hours" hidden><button data-h="6" aria-pressed="false">6 h</button><button data-h="7" aria-pressed="false">7 h</button><button data-h="8" aria-pressed="true">8 h</button><button data-h="9" aria-pressed="false">9 h</button></div></div>
 <button class="go" id="go">Log activity</button><p id="msg" aria-live="polite"></p></section>
-<section class="card"><h2>Stats</h2><div id="stats" style="width:100%;display:flex;flex-direction:column;gap:12px"></div></section>
-<section class="card"><h2>Recent activity</h2><ul id="hist"></ul><p class="note" id="empty">Your logged activities will appear here.</p></section>
+<section class="card tday"><div class="row"><h2>Today</h2><button class="lnk" id="tobook" type="button">Open log book</button></div><div id="tdaybody"></div></section></div>
+<div id="tp-book" hidden><section class="card wk"><div class="row"><h2>This week</h2><span class="wkr" id="wkrange"></span></div><div class="wk3"><div><b id="wkmin">0</b><small>minutes</small></div><div><b id="wkses">0</b><small>sessions</small></div><div><b id="wkdays">0/7</b><small>days active</small></div></div><div class="wkbars" id="wkbars"></div></section><div class="opts bkf" id="bkf"><button data-f="all" aria-pressed="true">All</button><button data-f="speed" aria-pressed="false">Run</button><button data-f="strength" aria-pressed="false">Lift</button><button data-f="iq" aria-pressed="false">Read</button><button data-f="stamina" aria-pressed="false">Cycle</button><button data-f="sleep" aria-pressed="false">Sleep</button></div><div id="book"></div><p class="note bkempty" id="bkempty" hidden>Nothing logged yet. Every run, lift, read, ride and sleep you log lands here.</p></div>
+<div id="tp-stats" hidden><section class="card"><h2>Stats</h2><div id="stats" style="width:100%;display:flex;flex-direction:column;gap:12px"></div></section></div>
+<ul id="hist" hidden></ul><p id="empty" hidden></p>
 <div class="acct" id="acct"></div>
 </div>
 
@@ -458,7 +508,7 @@ fast:Math.round(5.5+1.5*s+sp+.5*L.iq),strong:Math.round(8+3*s),
 heavy:Math.round((10+2*s)*dm),quick:Math.round((5+s+sp+.5*L.iq)*dm),grab:Math.round((8+1.5*s+.5*L.iq)*dm),
 crit:Math.min(50,5*L.focus),pct:Math.min(80,50+2*(L.iq-1))};}
 const evade=(d,a)=>Math.min(25,Math.max(0,7*(d.sp-a.sp)));
-const addPw=(f,n,on)=>{if(on)f.pw=Math.min(100,f.pw+n);};
+const addPw=(f,n,on)=>{if(on)f.pw=Math.min(100,f.pw+n);};const stRec=l=>Math.min(12,Math.max(0,l-1)),stTire=l=>Math.min(.4,.03*(l-1));
 function aiPick(g,R){const base={heavy:1,quick:1,grab:.8,feint:.6},h=g.hist,tot=(h.strike+h.strong+h.guard+h.sidestep)||1,f=k=>h[k]/tot,k=g.k;
 const w=g.pool.map(m=>{let x=base[m];if(k){if(m==="quick")x*=1+2*k*f("sidestep");if(m==="feint")x*=1+2*k*(f("sidestep")+f("guard"));if(m==="grab")x*=1+3*k*f("guard");if(m==="heavy")x*=1+2*k*(f("strike")+f("strong"));}return x;});
 let r=R()*w.reduce((a,b)=>a+b,0);for(let i=0;i<w.length;i++){r-=w[i];if(r<=0)return g.pool[i];}return g.pool[0];}
@@ -472,7 +522,10 @@ else if(a.c==="crank")ev.push({t:"hit",by:a,on:b,d:Math.round(a.strong*1.4*dm),t
 else{ev.push({t:"hit",by:a,on:b,d:Math.round(a.fast*1.5*dm),txt:"Drop!"});ev.push({t:"heal",by:a,on:a,d:Math.round(a.max*.2)});}
 return ev;}
 /* returns a list of events; applies them to g */
-function resolve(g,choice,R){R=R||Math.random;const P=g.p,O=g.o,m=g.cur,ev=[],push=e=>{e.s=[P.hp,O.hp,P.pw,O.pw];ev.push(e);};
+function resolve(g,choice,R){const ev=resolve0(g,choice,R),P=g.p,O=g.o;
+if(P.hp>0&&O.hp>0)for(const f of[P,O]){const d=Math.min(f.max-f.hp,stRec(f.L.stamina));if(d>0){f.hp+=d;ev.push({t:"heal",rec:1,by:f,on:f,d,s:[P.hp,O.hp,P.pw,O.pw]});}}
+return ev;}
+function resolve0(g,choice,R){R=R||Math.random;const P=g.p,O=g.o,m=g.cur,ev=[],push=e=>{e.s=[P.hp,O.hp,P.pw,O.pw];ev.push(e);};
 if(choice!=="special")g.hist[choice]++;g.last=choice==="special"?g.last:choice;
 const apply=e=>{if(e.t==="hit"){e.on.hp=Math.max(0,e.on.hp-e.d);addPw(e.by,8,e.by===P||g.ospec);addPw(e.on,6,e.on===P||g.ospec);}else if(e.t==="heal"){e.on.hp=Math.min(e.on.max,e.on.hp+e.d);}push(e);};
 const dead=()=>P.hp<=0||O.hp<=0;
@@ -591,7 +644,7 @@ $("v-"+s.k).textContent="Lv "+i.L;$("b-"+s.k).style.width=(i.need?i.into/i.need*
 const pr=(i.need?i.into+" / "+i.need+" min to Level "+(i.L+1):"Max level");$("s-"+s.k).textContent=s.k==="focus"?pr+". Grows with 7+ hours of sleep.":pr+" · today "+c.today[s.k]+"/"+CAP;}
 $("hist").innerHTML="";
 c.log.slice(0,5).forEach(l=>{const li=document.createElement("li"),a=document.createElement("span"),b=document.createElement("span");if(l.a==="sleep"){a.textContent="Sleep, "+l.h+" h";b.textContent="Energy "+l.e;}else{a.textContent=BY[l.a].v+", "+l.m+" min";b.textContent=BY[l.a].n+" Level "+l.lv;}li.append(a,b);$("hist").append(li);});
-$("empty").hidden=c.log.length>0;
+
 const e=st.energy;$("enbar").style.width=e+"%";$("enval").textContent=e+" / 100";$("entxt").textContent=e>=70?"Rested. Training at full strength.":e>=30?"Getting tired. Rest soon.":e>0?"Tired. Training gains are halved. Log sleep to recover.":"Exhausted. No gains until you sleep.";
 }
 function renderRank(){const i=rk(st.rp),n=R[i+1];try{$("winrp").textContent="+"+WINRP[i];}catch(e){}$("rname").textContent=R[i][0];$("rp").textContent=st.rp+" RP";$("rbar").style.width=(n?(st.rp-R[i][1])/(n[1]-R[i][1])*100:100)+"%";$("rnext").textContent=n?(n[1]-st.rp)+" RP to "+n[0]+((typeof st.rkBest!=="number"||st.rkBest<i+1)&&RREW[i+1]?" · reward: "+rewTxt(RREW[i+1]):""):"Top rank";}
@@ -809,7 +862,7 @@ const c=st[who],before=info(c.xp.focus).L,gain=hrs>=7?15:0;
 st.slept=day();st.energy=Math.min(100,st.energy+Math.round(hrs*12.5));
 if(gain)for(const k of["dash","crank","jam"])st[k].xp.focus+=gain;
 const after=info(c.xp.focus).L;
-c.log.unshift({a:"sleep",h:hrs,e:st.energy});c.log=c.log.slice(0,20);
+c.log.unshift({a:"sleep",h:hrs,e:st.energy,t:Date.now(),x:gain});c.log=c.log.slice(0,300);
 let t="Slept "+hrs+" hours. Energy is now "+st.energy+".";
 t+=gain?" All your characters gain 15 Focus XP."+(after>before?" Focus reaches Level "+after+"!":""):" Sleep 7 hours or more to build Focus.";
 t+=bumpStreak();save();render();$("msg").textContent=t;return;}
@@ -818,8 +871,8 @@ if(!(mins>=1&&mins<=240)){$("msg").textContent="Enter minutes from 1 to 240.";re
 const c=st[who],s=BY[act],left=CAP-c.today[act];
 if(left<=0){$("msg").textContent="Daily limit reached for "+s.g+". Come back tomorrow.";return;}
 const used=Math.min(mins,left),f=st.energy>=30?1:.5,gain=Math.max(1,Math.round(used*f)),before=info(c.xp[act]).L;
-c.xp[act]+=gain;c.today[act]+=used;st.energy=Math.max(0,st.energy-Math.round(used*.5));const i=info(c.xp[act]);
-c.log.unshift({a:act,m:used,lv:i.L});c.log=c.log.slice(0,20);
+c.xp[act]+=gain;c.today[act]+=used;st.energy=Math.max(0,st.energy-Math.round(used*.5*(1-stTire(lv(who,"stamina")))));const i=info(c.xp[act]);
+c.log.unshift({a:act,m:used,lv:i.L,t:Date.now(),x:gain});c.log=c.log.slice(0,300);
 let t=CH[who].n+": "+s.v+" for "+used+" minutes logged.";
 if(used<mins)t+=" Only "+used+" counted: that is today’s limit.";
 if(f<1)t+=" You were tired, so only "+gain+" counted toward "+s.n+".";
@@ -895,7 +948,7 @@ L.push(spec?(e.blk?me+" blocks the Special and takes "+e.d+".":(mine(e.by)?me:op
 await a.finished;$("shield").classList.remove("on");continue;}
 if(e.t==="dodge"){const a=seq(osp,OMV[m].w,-100,0,1.08);hop(psp,-8,-46);await sleep(OMV[m].w+140);pop(psp,m==="grab"?"Escaped!":"Dodged!");renderF(e.s);L.push(me+(m==="grab"?" slips out of the Grab.":" dodges the "+e.mv+"."));await a.finished;continue;}
 if(e.t==="evade"){const att=mine(e.by)?osp:psp,def=mine(e.by)?psp:osp,dir=mine(e.by)?-100:100;const a=seq(att,mine(e.by)?OMV[m].w:120,dir,0,1.04);hop(def,mine(e.by)?-22:22,-10);await sleep(260);pop(def,"Too fast!");L.push((mine(e.by)?me:op)+" is too quick and slips the "+e.mv+".");await a.finished;continue;}
-if(e.t==="heal"){pop(mine(e.on)?psp:osp,"+"+e.d);renderF(e.s);L.push((mine(e.on)?me:op)+" heals "+e.d+".");await sleep(300);continue;}
+if(e.t==="heal"){pop(mine(e.on)?psp:osp,"+"+e.d);renderF(e.s);L.push((mine(e.on)?me:op)+(e.rec?" gets their breath back: +"+e.d+" HP (Stamina).":" heals "+e.d+"."));await sleep(300);continue;}
 if(e.t==="stun"){pop(osp,"Stunned!","#6B4FD6");L.push(op+" is knocked off balance and can’t hit back.");await sleep(350);continue;}
 if(e.t==="cancel"){pop(psp,"Knocked back!","#6B4FD6");L.push(me+" gets knocked back. Block a Special next time!");await sleep(350);continue;}
 }
@@ -964,6 +1017,78 @@ catch(e){cnote("Couldn't reach the online leaderboard, so you're playing offline
 renderAcct();
 const rb=$("tabs").querySelector('[data-t="ranks"]');if(rb)rb.addEventListener("click",loadLB);
 setInterval(()=>{if(!document.hidden&&!$("ranks").hidden)loadLB();},45000);
+})();
+
+/* ---- Train page: Log / Log book / Stats ---- */
+(function(){
+const IC={speed:"🏃",strength:"🏋️",iq:"📖",stamina:"🚴",sleep:"😴"};
+const NM={speed:"Run",strength:"Lift",iq:"Read",stamina:"Cycle",sleep:"Sleep"};
+const COL={speed:"var(--lime)",strength:"var(--hit)",iq:"var(--blue)",stamina:"var(--orange)",sleep:"var(--violet)"};
+const TINT={speed:"#EEFBD5",strength:"#F7DEDE",iq:"#DCEAF7",stamina:"#FBE5D7",sleep:"#E7E1FA"};
+let pane="log",filt="all";
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
+const dkey=t=>new Date(t).toLocaleDateString("en-CA");
+const champs=["dash","crank","jam"];
+function all(){const out=[];for(const k of champs){const L=(st[k]&&st[k].log)||[];L.forEach((l,i)=>out.push(Object.assign({c:k,_i:i},l)));}
+ out.sort((a,b)=>(b.t||0)-(a.t||0)||a._i-b._i);return out;}
+function dayLabel(k){const t=day();const y=new Date();y.setDate(y.getDate()-1);
+ if(k===t)return"Today";if(k===y.toLocaleDateString("en-CA"))return"Yesterday";
+ const d=new Date(k+"T12:00:00");return d.toLocaleDateString("en-IE",{weekday:"long",day:"numeric",month:"short"});}
+const tm=t=>new Date(t).toLocaleTimeString("en-IE",{hour:"numeric",minute:"2-digit"});
+function setPane(p){pane=p;for(const q of["log","book","stats"])$("tp-"+q).hidden=q!==p;
+ $("trsw").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.p===p));if(p==="book")renderBook();}
+$("trsw").querySelectorAll("button").forEach(b=>b.onclick=()=>setPane(b.dataset.p));
+$("tobook").onclick=()=>{setPane("book");window.scrollTo({top:0,behavior:"smooth"});};
+$("bkf").querySelectorAll("button").forEach(b=>b.onclick=()=>{filt=b.dataset.f;$("bkf").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));renderBook();});
+
+function renderToday(){const c=st[who];let h='<div class="tdgrid">';
+ for(const k of["speed","strength","iq","stamina"]){const m=c.today[k]||0;
+  h+=`<div class="tdc"><span class="ic">${IC[k]}</span><b>${m}</b><small>${NM[k]} min</small><div class="mb"><i style="width:${Math.min(100,m/CAP*100)}%;background:${COL[k]}"></i></div></div>`;}
+ h+='</div>';const slept=st.slept===day();
+ h+=`<p class="tdsl">${slept?"😴 Sleep logged today.":"😴 Sleep not logged yet today."} Daily cap: ${CAP} min per activity for ${esc(CH[who].n)}.</p>`;
+ $("tdaybody").innerHTML=h;}
+
+function renderWeek(L){const now=new Date();const days=[];
+ for(let i=6;i>=0;i--){const d=new Date(now);d.setDate(now.getDate()-i);days.push(d.toLocaleDateString("en-CA"));}
+ const per={};days.forEach(k=>per[k]={speed:0,strength:0,iq:0,stamina:0,tot:0,n:0});
+ for(const l of L){if(!l.t)continue;const k=dkey(l.t);if(!per[k])continue;per[k].n++;if(l.a!=="sleep"){per[k][l.a]+=l.m;per[k].tot+=l.m;}}
+ const max=Math.max(60,...days.map(k=>per[k].tot));
+ let tot=0,ses=0,act=0;days.forEach(k=>{tot+=per[k].tot;ses+=per[k].n;if(per[k].n)act++;});
+ $("wkmin").textContent=tot;$("wkses").textContent=ses;$("wkdays").textContent=act+"/7";
+ $("wkrange").textContent="Last 7 days";
+ $("wkbars").innerHTML=days.map((k,i)=>{const p=per[k];const seg=["speed","strength","iq","stamina"].filter(a=>p[a]).map(a=>`<i style="height:${p[a]/max*100}%;background:${COL[a]}"></i>`).join("");
+  const wd=new Date(k+"T12:00:00").toLocaleDateString("en-IE",{weekday:"short"}).slice(0,2);
+  return `<div class="wkb${i===6?" now":""}"><em>${p.tot||""}</em><div class="col2">${seg}</div><span>${i===6?"Today":wd}</span></div>`;}).join("");}
+
+function entry(l){const k=l.a;const champ=CH[l.c]?CH[l.c].n:"";const when=l.t?tm(l.t):"";
+ let title,sub,g1,g2;
+ if(k==="sleep"){title="Sleep · "+l.h+" h";g1=l.h>=7?"+15 Focus XP":"No Focus XP";g2="Energy "+l.e;}
+ else{title=NM[k]+" · "+l.m+" min";if(typeof l.x==="number"){g1="+"+l.x+" XP";g2=BY[k].n+" Lv "+l.lv;}else{g1=BY[k].n+" Lv "+l.lv;g2="";}}
+ sub=[champ,when].filter(Boolean).join(" · ");
+ return `<div class="bke"><div class="ic" style="background:${TINT[k]}">${IC[k]}</div><div class="tx"><b>${esc(title)}</b><small>${esc(sub)}</small></div><div class="gn"><b>${esc(g1)}</b><small>${esc(g2)}</small></div></div>`;}
+
+function renderBook(){const L=all();renderWeek(L);
+ const F=L.filter(l=>filt==="all"||l.a===filt);
+ $("bkempty").hidden=F.length>0;
+ if(!L.length)$("bkempty").textContent="Nothing logged yet. Every run, lift, read, ride and sleep you log lands here.";
+ else if(!F.length)$("bkempty").textContent="No "+NM[filt].toLowerCase()+" sessions logged yet.";
+ const groups=[];let cur=null;
+ for(const l of F){const k=l.t?dkey(l.t):"old";if(!cur||cur.k!==k){cur={k,items:[]};groups.push(cur);}cur.items.push(l);}
+ $("book").innerHTML=groups.map(g=>{const mins=g.items.filter(l=>l.a!=="sleep").reduce((a,l)=>a+l.m,0);
+  const head=g.k==="old"?"Earlier":dayLabel(g.k);
+  const right=[mins?mins+" min":"",g.items.length+(g.items.length>1?" entries":" entry")].filter(Boolean).join(" · ");
+  return `<section class="bkday"><div class="bkh"><b>${head}</b><span>${right}</span></div>${g.items.map(entry).join("")}</section>`;}).join("");}
+
+for(const k of["speed","strength","iq","stamina","focus"]){const sb=$("s-"+k);if(sb&&!$("fx-"+k)){const d=document.createElement("div");d.className="fx";d.id="fx-"+k;sb.after(d);}}
+function renderFx(){const L=k=>lv(who,k);const sp=L("speed"),s=L("strength"),iq=L("iq"),sta=L("stamina"),fo=L("focus");
+ $("fx-speed").textContent="⚡ In fights: Fast attack hits for "+Math.round(5.5+1.5*s+sp+.5*iq)+". Faster champs go first and dodge more.";
+ $("fx-strength").textContent="💥 In fights: Strong attack hits for "+Math.round(8+3*s)+".";
+ $("fx-iq").textContent="🧠 In fights: Block stops "+Math.min(80,50+2*(iq-1))+"% of damage. "+(iq>=3?"Spots fake-outs. ":"Spots fake-outs at Lv 3. ")+(iq>=5?"Sees the move after next.":"Sees the move after next at Lv 5.");
+ $("fx-stamina").textContent="❤️ In fights: "+(stRec(sta)?"recovers "+stRec(sta)+" HP every round":"recovery starts at Lv 2")+" · "+(46+4*sta)+" HP · training tires you "+Math.round(stTire(sta)*100)+"% less";
+ $("fx-focus").textContent="🎯 In fights: "+Math.min(50,5*fo)+"% chance of a critical hit (1.5× damage).";}
+const _render=render;
+render=function(){_render.apply(this,arguments);try{renderToday();renderFx();if(pane==="book")renderBook();}catch(e){}};
+try{renderToday();renderFx();}catch(e){}
 })();
 </script>
 </body>
